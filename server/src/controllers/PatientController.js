@@ -290,11 +290,10 @@ const getaDoctorslist = async (req, res) => {
         const greaterexperience = Number(req.query.greaterexperience)
         const minimumexperience = Number(req.query.minimumexperience)
         const speciality = req.query.speciality
-<<<<<<< HEAD
+
         const status = req.query.status;
 
-=======
->>>>>>> 508d564508cd42bc1f44013c2c08b6ac89a48311
+
         const pageskip = (page - 1) * limit
 
         const filter = {}
@@ -312,13 +311,12 @@ const getaDoctorslist = async (req, res) => {
             filter.speciality = { $regex: speciality, $options: "i" }
         }
 
-<<<<<<< HEAD
+
         if (status && ["approved", "rejected", "notverified"].includes(status)) {
             filter.status = status;
         }
 
-=======
->>>>>>> 508d564508cd42bc1f44013c2c08b6ac89a48311
+
 
         const doctors = await Doctormodel.find(filter).skip(pageskip).limit(limit).populate("userID").populate("clinics")
         const total = await Doctormodel.countDocuments(filter);
@@ -346,15 +344,14 @@ const getaDoctorslist = async (req, res) => {
 
 
 
-<<<<<<< HEAD
 const getDoctorprofileByDoctorid = async (req, res) => {
     try {
         const doctorID = req.params.id;
-=======
+
 const getDoctorprofileByDoctorid=async(req,res)=>{
     try {
          const doctorID = req.params.id;
->>>>>>> 508d564508cd42bc1f44013c2c08b6ac89a48311
+
 
         const existingdoctor = await Doctormodel.findById(doctorID).populate("userID").populate("clinics")
 
@@ -372,8 +369,6 @@ const getDoctorprofileByDoctorid=async(req,res)=>{
         });
 
 
-<<<<<<< HEAD
-
     } catch (error) {
         res.status(500).send(
             {
@@ -382,7 +377,7 @@ const getDoctorprofileByDoctorid=async(req,res)=>{
             }
         )
 
-=======
+
         
     } catch (error) {
         res.status(500).send(
@@ -391,15 +386,14 @@ const getDoctorprofileByDoctorid=async(req,res)=>{
                 status:"notsuccess"
             }
         )
-        
->>>>>>> 508d564508cd42bc1f44013c2c08b6ac89a48311
+
     }
 }
 
 
-<<<<<<< HEAD
+
 export { addPatientController, getPatientController, updatePatientController, updatePatientimgController, updateInsuranceimgController, getaDoctorslist, getDoctorprofileByDoctorid }
-=======
+
 export { addPatientController, getPatientController, updatePatientController, updatePatientimgController, updateInsuranceimgController, getaDoctorslist,getDoctorprofileByDoctorid}
->>>>>>> 508d564508cd42bc1f44013c2c08b6ac89a48311
+
 
