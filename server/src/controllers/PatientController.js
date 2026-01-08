@@ -3,397 +3,254 @@ import { Patientmodel } from "../models/Patientmodel.js";
 import { Usermodel } from "../models/Usermodel.js";
 import { uploadoncloudinary } from "../utils/cloudinary.js";
 
+/* ================= ADD PATIENT ================= */
 const addPatientController = async (req, res) => {
-    try {
-        const { patientname, gender, DOB, bloodgroup, height, weight, injuries, familymedicalhistory,
-            exerciseroutine, alcohol, smoking, allergies, address, alternateNo, userID } = req.body;
+  try {
+    const {
+      patientname,
+      gender,
+      DOB,
+      bloodgroup,
+      height,
+      weight,
+      injuries,
+      familymedicalhistory,
+      exerciseroutine,
+      alcohol,
+      smoking,
+      allergies,
+      address,
+      alternateNo,
+      userID
+    } = req.body;
 
-        if ([patientname, gender, DOB, bloodgroup, height, weight, injuries, familymedicalhistory,
-            exerciseroutine, alcohol, smoking, allergies, address, alternateNo, userID].some((field) =>
-                field.trim() === ""
-            )) {
-            res.status(200).send({
-                message: "All fields are required",
-                status: "notsuccess"
-            })
-        }
-
-        const patientprofileimagelocalpath = req.files?.profileImage[0].path
-
-        if (!patientprofileimagelocalpath) {
-            res.status(200).send({
-                message: "profile image is required",
-                status: "notsuccess"
-            })
-        }
-
-        console.log(patientprofileimagelocalpath)
-        const patientprofileimage = await uploadoncloudinary(patientprofileimagelocalpath)
-
-        console.log(patientprofileimage)
-
-        const healthinsuranceimglocalpath = req.files?.healthinsurance[0].path
-        if (!healthinsuranceimglocalpath) {
-            res.status(200).send({
-                message: "health insurame image is required",
-                status: "notsuccess"
-            })
-        }
-
-
-
-        const healthinsuranceimage = await uploadoncloudinary(healthinsuranceimglocalpath)
-
-        const existingpatient = await Patientmodel.findOne({ userID })
-
-        if (existingpatient) {
-            res.status(200).send({
-                message: "patient already exist",
-                status: "notsuccess"
-            })
-        }
-
-        const Patient = await Patientmodel.create({
-            patientname, gender, DOB, bloodgroup, height, weight, injuries, familymedicalhistory,
-            exerciseroutine, alcohol, smoking, allergies, address, alternateNo, userID, profileImage: patientprofileimage.url,
-            healthinsurance: healthinsuranceimage.url
-
-        })
-
-        await Usermodel.findByIdAndUpdate(userID, { isprofilecreated: true })
-
-        res.status(200).send({
-            message: "Patient profile created successfully",
-            status: 'success',
-            Patient,
-
-            patientid: Patient._id
-
-        
-
-
-        })
-    } catch (error) {
-        res.status(500).send({
-            message: `Patient Controller error is: ${error} `,
-            status: "failed"
-
-        })
-
+    if (
+      [
+        patientname,
+        gender,
+        DOB,
+        bloodgroup,
+        height,
+        weight,
+        injuries,
+        familymedicalhistory,
+        exerciseroutine,
+        alcohol,
+        smoking,
+        allergies,
+        address,
+        alternateNo,
+        userID
+      ].some(field => !field || field.toString().trim() === "")
+    ) {
+      return res.status(400).send({
+        message: "All fields are required",
+        status: "notsuccess"
+      });
     }
 
-}
+    const profilePath = req.files?.profileImage?.[0]?.path;
+    const insurancePath = req.files?.healthinsurance?.[0]?.path;
 
-const getPatientController = async (req, res) => {
-    try {
-        const userID = req.params.id;
-
-        const existingPatient = await Patientmodel.findOne({ userID }).populate("userID");
-
-        if (!existingPatient) {
-            return res.status(404).send({
-                message: "Patient not found",
-                status: "notsuccess"
-            });
-        }
-
-        res.status(200).send({
-            message: "Profile fetched successfully",
-            status: "success",
-            existingPatient,
-        });
-
-    } catch (error) {
-        res.status(500).send({
-            message: `getPatientController error: ${error.message}`,
-            status: "notsuccess"
-        });
+    if (!profilePath || !insurancePath) {
+      return res.status(400).send({
+        message: "Profile image and insurance image are required",
+        status: "notsuccess"
+      });
     }
+
+    const profileImage = await uploadoncloudinary(profilePath);
+    const insuranceImage = await uploadoncloudinary(insurancePath);
+
+    const existingPatient = await Patientmodel.findOne({ userID });
+    if (existingPatient) {
+      return res.status(400).send({
+        message: "Patient already exists",
+        status: "notsuccess"
+      });
+    }
+
+    const patient = await Patientmodel.create({
+      patientname,
+      gender,
+      DOB,
+      bloodgroup,
+      height,
+      weight,
+      injuries,
+      familymedicalhistory,
+      exerciseroutine,
+      alcohol,
+      smoking,
+      allergies,
+      address,
+      alternateNo,
+      userID,
+      profileImage: profileImage.url,
+      healthinsurance: insuranceImage.url
+    });
+
+    await Usermodel.findByIdAndUpdate(userID, { isprofilecreated: true });
+
+    return res.status(201).send({
+      message: "Patient profile created successfully",
+      status: "success",
+      patient,
+      patientid: patient._id
+    });
+
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+      status: "failed"
+    });
+  }
 };
 
+/* ================= GET PATIENT ================= */
+const getPatientController = async (req, res) => {
+  try {
+    const userID = req.params.id;
+
+    const patient = await Patientmodel.findOne({ userID }).populate("userID");
+
+    if (!patient) {
+      return res.status(404).send({
+        message: "Patient not found",
+        status: "notsuccess"
+      });
+    }
+
+    return res.status(200).send({
+      message: "Profile fetched successfully",
+      status: "success",
+      patient
+    });
+
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+      status: "failed"
+    });
+  }
+};
+
+/* ================= UPDATE PATIENT ================= */
 const updatePatientController = async (req, res) => {
-    try {
-        const { userID } = req.params;
-        const { patientname, gender, DOB, bloodgroup, height, weight, injuries, familymedicalhistory,
-            exerciseroutine, alcohol, smoking, allergies, address, alternateNo, } = req.body;
+  try {
+    const { userID } = req.params;
 
-        const getpatient = await Patientmodel.findOne({ userID })
-        if (!getpatient) {
-            res.status(200).send({
-                message: "patientprofile not found",
-                status: "notsuccess"
-            })
-        }
+    const updatedPatient = await Patientmodel.findOneAndUpdate(
+      { userID },
+      req.body,
+      { new: true }
+    );
 
-        const updatedata = {
-            patientname, gender, DOB, bloodgroup, height, weight, injuries, familymedicalhistory,
-            exerciseroutine, alcohol, smoking, allergies, address, alternateNo,
-
-        }
-
-
-
-        const updatepatient = await Patientmodel.findOneAndUpdate(getpatient, updatedata, { new: true })
-
-
-
-
-
-
-        res.status(200).send({
-            message: "patient profile updated successfully",
-            status: "success",
-            updatepatient
-
-        })
-
-
-
-
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({
-            message: "failed to update",
-            status: "failed",
-            error
-
-
-        })
-
+    if (!updatedPatient) {
+      return res.status(404).send({
+        message: "Patient not found",
+        status: "notsuccess"
+      });
     }
 
-}
+    return res.status(200).send({
+      message: "Patient profile updated successfully",
+      status: "success",
+      updatedPatient
+    });
 
-const updatePatientimgController = async (req, res) => {
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+      status: "failed"
+    });
+  }
+};
 
-
-    try {
-
-        const { userID } = req.params
-        const patientprofileimagefilelocalpath = req.files?.profileImage[0].path
-        console.log(patientprofileimagefilelocalpath)
-
-        if (!patientprofileimagefilelocalpath) {
-            res.status(200).send(
-                {
-                    message: "Profileimage is required",
-                    status: 'notsuccess'
-                }
-            )
-        }
-
-
-
-
-
-        const patientprofileimage = await uploadoncloudinary(patientprofileimagefilelocalpath)
-
-        const getpatient = await Patientmodel.findOne({ userID })
-        if (!getpatient) {
-            res.status(200).send({
-                message: "patientprofile not found",
-                status: "notsuccess"
-            })
-        }
-
-
-
-        const updatepatientimg = await Patientmodel.findOneAndUpdate({ userID }, { profileImage: patientprofileimage.url }, { new: true })
-        res.status(200).send(
-            {
-                message: "patient image updated successfully",
-                status: "success",
-                getpatient
-
-
-            }
-        )
-
-
-    } catch (error) {
-        res.status(500).send(
-            {
-                message: "patient image not updated",
-                status: "failed",
-                error: error.message
-
-            }
-        )
-
-    }
-}
-
-const updateInsuranceimgController = async (req, res) => {
-
-
-    try {
-
-        const { userID } = req.params
-        const insuranceimagefilelocalpath = req.files?.healthinsurance[0].path
-        console.log(insuranceimagefilelocalpath)
-
-        if (!insuranceimagefilelocalpath) {
-            res.status(200).send(
-                {
-                    message: "insurance image is required",
-                    status: 'notsuccess'
-                }
-            )
-        }
-
-
-
-
-
-        const insuranceimage = await uploadoncloudinary(insuranceimagefilelocalpath)
-
-        const getpatientprofile = await Patientmodel.findOne({ userID })
-        if (!getpatientprofile) {
-            res.status(200).send({
-                message: "insurance img not found",
-                status: "notsuccess"
-            })
-        }
-
-
-
-        const updateinsuranceimg = await Patientmodel.findOneAndUpdate({ userID }, { healthinsurance: insuranceimage.url }, { new: true })
-        res.status(200).send(
-            {
-                message: "insurance image updated successfully",
-                status: "success",
-                getpatientprofile
-
-
-            }
-        )
-
-
-    } catch (error) {
-        res.status(500).send(
-            {
-                message: "insurance image not updated",
-                status: "failed",
-                error: error.message
-
-            }
-        )
-
-    }
-}
-
+/* ================= GET DOCTORS LIST ================= */
 const getaDoctorslist = async (req, res) => {
-    try {
-        const page = req.query.page
-        const limit = req.query.limit
-        const doctorname = req.query.doctorname
-        const greaterexperience = Number(req.query.greaterexperience)
-        const minimumexperience = Number(req.query.minimumexperience)
-        const speciality = req.query.speciality
+  try {
+    const {
+      page = 1,
+      limit = 10,
+      doctorname,
+      speciality,
+      status
+    } = req.query;
 
-        const status = req.query.status;
+    const skip = (page - 1) * limit;
+    const filter = {};
 
+    if (doctorname)
+      filter.doctorname = { $regex: doctorname, $options: "i" };
 
-        const pageskip = (page - 1) * limit
+    if (speciality)
+      filter.speciality = { $regex: speciality, $options: "i" };
 
-        const filter = {}
+    if (status)
+      filter.status = status;
 
-        if (doctorname) {
-            filter.doctorname = { $regex: doctorname, $options: "i" }
-        }
+    const doctors = await Doctormodel.find(filter)
+      .skip(skip)
+      .limit(Number(limit))
+      .populate("userID")
+      .populate("clinics");
 
+    const total = await Doctormodel.countDocuments(filter);
 
-        if (Number(minimumexperience) && Number(greaterexperience)) {
-            filter.experience = { $gte: minimumexperience, $lte: greaterexperience }
-        }
+    return res.status(200).send({
+      status: "success",
+      totalrecords: total,
+      totalpages: Math.ceil(total / limit),
+      currentpage: Number(page),
+      doctors
+    });
 
-        if (speciality) {
-            filter.speciality = { $regex: speciality, $options: "i" }
-        }
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+      status: "failed"
+    });
+  }
+};
 
-
-        if (status && ["approved", "rejected", "notverified"].includes(status)) {
-            filter.status = status;
-        }
-
-
-
-        const doctors = await Doctormodel.find(filter).skip(pageskip).limit(limit).populate("userID").populate("clinics")
-        const total = await Doctormodel.countDocuments(filter);
-
-        res.status(200).send({
-            status: "success",
-            totalpages: Math.ceil(total / limit),
-            currentpage: page,
-            totalrecords: total,
-            doctors
-        })
-
-
-    } catch (error) {
-        res.status(500).send(
-            {
-                message: `doctor list error:${error}`,
-                status: "notsuccess"
-            }
-        )
-
-    }
-
-}
-
-
-
+/* ================= GET DOCTOR BY ID ================= */
 const getDoctorprofileByDoctorid = async (req, res) => {
-    try {
-        const doctorID = req.params.id;
+  try {
+    const doctorID = req.params.id;
 
-const getDoctorprofileByDoctorid=async(req,res)=>{
-    try {
-         const doctorID = req.params.id;
+    const doctor = await Doctormodel.findById(doctorID)
+      .populate("userID")
+      .populate("clinics");
 
-
-        const existingdoctor = await Doctormodel.findById(doctorID).populate("userID").populate("clinics")
-
-        if (!existingdoctor) {
-            return res.status(200).send({
-                message: "Doctor not found",
-                status: "notsuccess"
-            });
-        }
-
-        return res.status(200).send({
-            message: "Profile fetched successfully",
-            status: "success",
-            existingdoctor
-        });
-
-
-    } catch (error) {
-        res.status(500).send(
-            {
-                message: `getdoctorbyid error ${error}`,
-                status: "notsuccess"
-            }
-        )
-
-
-        
-    } catch (error) {
-        res.status(500).send(
-            {
-                message:`getdoctorbyid error ${error}`,
-                status:"notsuccess"
-            }
-        )
-
+    if (!doctor) {
+      return res.status(404).send({
+        message: "Doctor not found",
+        status: "notsuccess"
+      });
     }
-}
 
+    return res.status(200).send({
+      message: "Profile fetched successfully",
+      status: "success",
+      doctor
+    });
 
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+      status: "failed"
+    });
+  }
+};
 
-export { addPatientController, getPatientController, updatePatientController, updatePatientimgController, updateInsuranceimgController, getaDoctorslist, getDoctorprofileByDoctorid }
-
-export { addPatientController, getPatientController, updatePatientController, updatePatientimgController, updateInsuranceimgController, getaDoctorslist,getDoctorprofileByDoctorid}
+/* ================= EXPORT ================= */
+export {
+  addPatientController,
+  getPatientController,
+  updatePatientController,
+  getaDoctorslist,
+  getDoctorprofileByDoctorid
+};
 
 
