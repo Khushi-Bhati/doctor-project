@@ -87,15 +87,16 @@ const Registerform = () => {
 
       }
 
-      const registerresponse = await axios.post("/Hospital/user/register",
-        formvalue,
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+     const registerresponse = await axios.post(
+  `${process.env.REACT_APP_API_URL}Hospital/user/register`,
+  formvalue,
+  {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 
-          }
-        }
-      )
 
 
       if (registerresponse.data.status === "success") {
