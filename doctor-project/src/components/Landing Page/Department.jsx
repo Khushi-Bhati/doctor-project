@@ -30,6 +30,7 @@ const [loading, setLoading] = useState(true);
       );
 
       const data = await response.json();
+      console.log(data + "i went to check the problem")
 
       // adjust according to your API response structure
       setDepartments1(data.data || data);
