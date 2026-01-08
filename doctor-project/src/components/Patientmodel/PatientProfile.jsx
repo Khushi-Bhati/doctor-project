@@ -117,7 +117,7 @@ const PatientProfile = () => {
   const handleProfileImage = async (e) => {
     const profileimage = e.target.files[0]
     if (!profileimage) return;
-    setProfileImage(profileimage)
+    setprofileImageurl(profileimage)
 
 
     try {
@@ -131,7 +131,7 @@ const PatientProfile = () => {
       if (updatedprofileimgresponse.data.status === "success") {
 
         Dispatch(setPatientprofile(updatedprofileimgresponse.data.getpatient))
-        setProfileImage(updatedprofileimgresponse.data.getpatient.profileImage)
+        // setProfileImage(updatedprofileimgresponse.data.getpatient.profileImage)
         setprofileImageurl(updatedprofileimgresponse.data.getpatient.profileImage)
 
 
@@ -158,7 +158,7 @@ const PatientProfile = () => {
   const handleinsuranceImage = async (e) => {
     const insuranceimage = e.target.files[0]
     if (!insuranceimage) return;
-    setInsuranceImage(insuranceimage)
+    setInsuranceImageurl(insuranceimage)
 
 
     try {
@@ -175,7 +175,7 @@ const PatientProfile = () => {
       if (updatedinsuranceimgresponse.data.status === "success") {
 
         Dispatch(setPatientprofile(updatedinsuranceimgresponse.data.getpatientprofile))
-        setInsuranceImage(updatedinsuranceimgresponse.data.getpatientprofile.healthinsurance)
+        // setInsuranceImage(updatedinsuranceimgresponse.data.getpatientprofile.healthinsurance)
         setInsuranceImageurl(updatedinsuranceimgresponse.data.getpatientprofile.healthinsurance)
 
 
