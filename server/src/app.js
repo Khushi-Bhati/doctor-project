@@ -25,6 +25,13 @@ app.use("/Hospital/patient",patientrouter)
 app.use("/Hospital/clinic",clinicrouter)
 app.use("/Hospital/appointment",appointmentrouter)
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Hospital API is running successfully 🚀"
+  });
+});
+
 
 
 
