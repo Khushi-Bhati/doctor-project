@@ -66,11 +66,11 @@ const addPatientController = async (req, res) => {
             message: "Patient profile created successfully",
             status: 'success',
             Patient,
-<<<<<<< HEAD
+
             patientid: Patient._id
-=======
+
             patientid:Patient._id
->>>>>>> 508d564508cd42bc1f44013c2c08b6ac89a48311
+
 
         })
     } catch (error) {
