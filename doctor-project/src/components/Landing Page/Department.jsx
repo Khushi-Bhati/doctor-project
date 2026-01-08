@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./../../styles/Department.css";
 import cardiologist from "./../../images/cardiologist.webp";
 import surgeon from "./../../images/general-surgeon.webp";
