@@ -9,10 +9,10 @@ import { useDispatch } from "react-redux";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import loginImage from "./../images/shape-reg-provider-3.webp"
 import Navbar from "./Landing Page/Navbar";
-import Footer from "./Landing Page/Footer";
+
 
 const Loginform = () => {
-  const Dispatch = useDispatch();
+  
   const Navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
