@@ -34,13 +34,14 @@ const Loginform = () => {
     e.preventDefault();
     try {
       setLoading(true);
-     const loginresponse = await axios.post(
-  `${process.env.REACT_APP_API_URL}/Hospital/user/login`,
+const loginresponse = await axios.post(
+  `${process.env.REACT_APP_API_URL}Hospital/user/login`,
   formvalue,
   {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   }
 );
+
 
 
       setLoading(false);
