@@ -9,7 +9,7 @@ import appointmentrouter from "./routes/Appointment.js";
 const app=express();
 
 app.use(cors({
-    origin:"http://localhost:8000"
+    origin:"*"
 
 }))
 
