@@ -5,7 +5,7 @@ import "./../styles/Registerform.css";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import loginImage from "./../images/shape-reg-provider-3.webp"
 import Navbar from "./Landing Page/Navbar";
