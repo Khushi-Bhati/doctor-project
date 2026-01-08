@@ -9,9 +9,8 @@ import appointmentrouter from "./routes/Appointment.js";
 const app=express();
 app.use(
   cors({
-    origin: "https://doctor-frontend-project-3.onrender.com",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
+    origin: [ "https://doctor-frontend-project-3.onrender.com",
+   "https://doctor-project-1-yndq.onrender.com" ]
   })
 );
 
