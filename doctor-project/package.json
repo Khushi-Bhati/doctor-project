@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://doctor-frontend-project-3.onrender.com",
+  "proxy": "https://doctor-project-1-yndq.onrender.com/",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
