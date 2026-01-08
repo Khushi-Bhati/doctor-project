@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import "./../../styles/Department.css";
 import cardiologist from "./../../images/cardiologist.webp";
 import surgeon from "./../../images/general-surgeon.webp";
@@ -19,30 +19,6 @@ const departments = [
 
 const Departments = () => {
   const scrollRef = useRef(null);
-  const [departments1, setDepartments1] = useState([]);
-const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-  const fetchClinics = async () => {
-    try {
-      const response = await fetch(
-        "https://doctor-project-1-yndq.onrender.com/Hospital/doctor/getclinicslist"
-      );
-
-      const data = await response.json();
-      console.log(data + "i went to check the problem")
-
-      // adjust according to your API response structure
-      setDepartments1(data.data || data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching clinics:", error);
-      setLoading(false);
-    }
-  };
-
-  fetchClinics();
-}, []);
 
   const scroll = (direction) => {
     scrollRef.current?.scrollBy({
@@ -77,14 +53,12 @@ const [loading, setLoading] = useState(true);
 
             <div className="dept-scroll" ref={scrollRef}>
               <div className="dept-grid">
-                {departments1.map((dept, index) => (
+                {departments.map((dept, index) => (
                   <div className="dept-card" key={index}>
                     <div className="dept-icon">
-                      {/* <img src={dept.icon} alt={dept.title} /> */}
-                      <img src={dept.image} alt={dept.name} /> 
+                      <img src={dept.icon} alt={dept.title} />
                     </div>
-                    {/* <h4>{dept.title}</h4> */}
-                     <h4>{dept.name}</h4>
+                    <h4>{dept.title}</h4>
                     <button className="consult-btn">Consult Now</button>
                   </div>
                 ))}
