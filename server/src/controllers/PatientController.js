@@ -69,7 +69,7 @@ const addPatientController = async (req, res) => {
 
             patientid: Patient._id
 
-            patientid:Patient._id
+        
 
 
         })
