@@ -1,0 +1,149 @@
+/* ------------------ PAGE WRAPPER ------------------ */
+.login-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #eef1f7;
+  padding: 20px;
+}
+
+/* ------------------ MAIN CARD WRAPPER ------------------ */
+.login-card-wrapper {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 7%;
+}
+
+/* ------------------ LEFT SIDE IMAGE ------------------ */
+.login-card-wrapper img {
+  width: 45%;
+  object-fit: cover;
+  background-position: center;
+}
+
+/* ------------------ RIGHT SIDE SECTION ------------------ */
+.login-right-section {
+  width: 55%;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 100%;
+}
+
+.login-card h2 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #1a1a1a;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+/* ------------------ INPUT GROUP ------------------ */
+.input-group {
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.input-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #3a57e8;
+  box-shadow: 0px 0px 5px rgba(58, 87, 232, 0.3);
+}
+
+/* ------------------ PASSWORD EYE ICON ------------------ */
+.eye {
+  position: absolute;
+  top: 38px;
+  right: 12px;
+  cursor: pointer;
+  color: #555;
+  font-size: 18px;
+}
+
+/* ------------------ BUTTON ------------------ */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background: #3a57e8;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #2c46c7;
+}
+
+/* ------------------ SIGNUP TEXT ------------------ */
+.signup-text {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.signup-text a {
+  color: #3a57e8;
+  font-weight: 600;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 850px) {
+  .login-card-wrapper {
+    flex-direction: column;
+    max-width: 450px;
+  }
+
+  .login-card-wrapper img {
+    display: none;
+  }
+
+  .login-right-section {
+    width: 100%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-card {
+    padding: 0;
+  }
+  .login-card h2 {
+    font-size: 26px;
+  }
+}

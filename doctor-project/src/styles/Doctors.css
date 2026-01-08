@@ -1,0 +1,149 @@
+:root {
+  --primary: #003399;
+  --accent: #00d1b2;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --bg-section: linear-gradient(90deg, #e0e7ff 0%, #f0f4ff 100%);
+}
+
+/* ================= SECTION ================= */
+.doctors-section {
+  padding: 80px 20px;
+  background: var(--bg-section);
+  text-align: center;
+  position: relative;
+}
+
+.doctors-section .doc-subtitle {
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.doctors-section .doc-title {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.doctors-section .doc-text {
+  color: var(--muted);
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ================= CAROUSEL ================= */
+.doctors-section .carousel-container {
+  position: relative;
+}
+
+.doctors-section .doctors-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 30px;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+  justify-content: center;
+}
+
+.doctors-section .doctor-card {
+  flex: 0 0 250px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 25px 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  scroll-snap-align: center;
+}
+
+.doctors-section .doctor-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+}
+
+.doctors-section .doctor-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 4px solid var(--accent);
+}
+
+.doctors-section .doctor-card h3 {
+  color: var(--primary);
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.doctors-section .speciality {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.doctors-section .doc-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  min-height: 60px;
+}
+
+/* ================= ARROWS ================= */
+.doctors-section .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+.doctors-section .arrow:hover {
+  background-color: var(--accent);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.doctors-section .left-arrow {
+  left: -20px;
+}
+
+.doctors-section .right-arrow {
+  right: -20px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .doctors-section .doctor-card {
+    flex: 0 0 200px;
+  }
+
+  .doctors-section .arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .doctors-section .doctor-card {
+    flex: 0 0 160px;
+    padding: 20px 15px;
+  }
+
+  .doctors-section .doctor-card img {
+    width: 90px;
+    height: 90px;
+  }
+}

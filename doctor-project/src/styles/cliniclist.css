@@ -1,0 +1,245 @@
+:root {
+  --primary: #3b4cb8;
+  --primary-dark: #2f3e9e;
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+}
+
+/* ===================== */
+/* ROOT CONTAINER */
+/* ===================== */
+.cliniclist-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px 16px 30px;
+  background: var(--bg);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ===================== */
+/* PAGE TITLE */
+/* ===================== */
+.cliniclist-container .page-title {
+  color: var(--primary);
+  margin-bottom: 16px;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 600;
+}
+
+/* ===================== */
+/* FILTER BAR */
+/* ===================== */
+.cliniclist-container .filter-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 14px;
+  background: var(--card);
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 22px rgba(59,76,184,0.12);
+  transition: box-shadow 0.3s ease;
+}
+
+.cliniclist-container .filter-bar:hover {
+  box-shadow: 0 12px 30px rgba(59,76,184,0.18);
+}
+
+.cliniclist-container .filter-bar select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  background: #f9fafb;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cliniclist-container .filter-bar select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(59,76,184,0.2);
+  outline: none;
+}
+
+/* ===================== */
+/* CLINIC CARD */
+/* ===================== */
+.cliniclist-container .clinic-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  padding: 20px;
+  background: var(--card);
+  border-radius: 15px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(59,76,184,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cliniclist-container .clinic-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(59,76,184,0.2);
+}
+
+/* ===================== */
+/* LEFT CONTENT */
+/* ===================== */
+.cliniclist-container .clinic-left {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.cliniclist-container .clinic-logo {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* ===================== */
+/* CLINIC INFO */
+/* ===================== */
+.cliniclist-container .clinic-info h3 {
+  font-size: clamp(18px, 2.5vw, 20px);
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.cliniclist-container .location {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.cliniclist-container .fees {
+  font-weight: 600;
+  margin: 6px 0;
+}
+
+.cliniclist-container .open {
+  font-size: 13px;
+  color: #16a34a;
+}
+
+/* ===================== */
+/* DOCTOR */
+/* ===================== */
+.cliniclist-container .doctor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cliniclist-container .doctor img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cliniclist-container .doctor span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ===================== */
+/* RIGHT CONTENT */
+/* ===================== */
+.cliniclist-container .clinic-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-width: 200px;
+}
+
+.cliniclist-container .rating {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.cliniclist-container .add-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(59,76,184,0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cliniclist-container .add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(59,76,184,0.35);
+}
+
+/* ===================== */
+/* LARGE TABLETS */
+/* ===================== */
+@media (max-width: 1024px) {
+  .cliniclist-container .filter-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cliniclist-container .clinic-left {
+    grid-template-columns: 100px 1fr;
+  }
+}
+
+/* ===================== */
+/* TABLETS */
+/* ===================== */
+@media (max-width: 768px) {
+  .cliniclist-container .filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .cliniclist-container .clinic-card {
+    grid-template-columns: 1fr;
+  }
+
+  .cliniclist-container .clinic-left {
+    grid-template-columns: 1fr;
+  }
+
+  .cliniclist-container .clinic-right {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}
+
+/* ===================== */
+/* SMALL MOBILE */
+/* ===================== */
+@media (max-width: 480px) {
+  .cliniclist-container {
+    padding: 10px;
+  }
+
+  .cliniclist-container .clinic-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .cliniclist-container .add-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cliniclist-container .doctor {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

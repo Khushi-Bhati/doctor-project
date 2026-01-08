@@ -1,0 +1,187 @@
+/* =========================================================
+   APPOINTMENT CTA SECTION
+========================================================= */
+.appointment-cta {
+  position: relative;
+  padding: 72px 6%;
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  overflow: hidden;
+}
+
+/* Subtle depth overlay */
+.appointment-cta .appointment-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(56,189,248,0.28), transparent 60%);
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+.appointment-cta .appointment-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+.appointment-cta .appointment-content {
+  max-width: 560px;
+  color: #ffffff;
+}
+
+.appointment-cta .appointment-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 13.5px;
+  margin-bottom: 16px;
+}
+
+.appointment-cta .appointment-content h2 {
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.appointment-cta .appointment-content h2 span {
+  color: #38bdf8;
+}
+
+.appointment-cta .appointment-content p {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #e0e7ff;
+  margin-bottom: 26px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+.appointment-cta .appointment-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.appointment-cta .btn-primary {
+  background: #38bdf8;
+  color: #0f172a;
+  padding: 13px 26px;
+  border-radius: 50px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+
+  box-shadow: 0 10px 26px rgba(56,189,248,0.45);
+  transition:
+    transform 0.15s ease-out,
+    box-shadow 0.15s ease-out;
+}
+
+.appointment-cta .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(56,189,248,0.6);
+}
+
+.appointment-cta .btn-outline {
+  background: transparent;
+  color: #ffffff;
+  padding: 13px 24px;
+  border-radius: 50px;
+  border: 2px solid rgba(255,255,255,0.6);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease-out,
+    color 0.15s ease-out;
+}
+
+.appointment-cta .btn-outline:hover {
+  background: #ffffff;
+  color: #2563eb;
+}
+
+/* =========================================================
+   RIGHT INFO CARDS
+========================================================= */
+.appointment-cta .appointment-info {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.appointment-cta .info-card {
+  background: #ffffff;
+  padding: 20px 24px;
+  border-radius: 16px;
+  min-width: 180px;
+  text-align: center;
+
+  box-shadow: 0 14px 34px rgba(0,0,0,0.18);
+  transition:
+    transform 0.18s ease-out,
+    box-shadow 0.18s ease-out;
+}
+
+.appointment-cta .info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(0,0,0,0.28);
+}
+
+.appointment-cta .info-card h4 {
+  font-size: 15.8px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #2563eb;
+}
+
+.appointment-cta .info-card p {
+  font-size: 14.5px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 768px) {
+  .appointment-cta .appointment-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .appointment-cta .appointment-actions {
+    justify-content: center;
+  }
+
+  .appointment-cta .appointment-info {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .appointment-cta {
+    padding: 60px 5%;
+  }
+
+  .appointment-cta .info-card {
+    width: 100%;
+    max-width: 280px;
+  }
+}

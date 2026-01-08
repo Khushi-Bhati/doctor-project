@@ -1,0 +1,389 @@
+:root {
+  --primary: #4f46e5;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --bg: #f4f6fb;
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --border: rgba(255, 255, 255, 0.4);
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+}
+
+/* ================= PAGE ================= */
+.doctor-page {
+  min-height: 100vh;
+  padding: 32px;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ================= HEADER ================= */
+.doctor-page .doctor-page-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-dark);
+}
+
+.doctor-page .doctor-page-header p {
+  margin-top: 6px;
+  margin-bottom: 28px;
+  color: var(--text-muted);
+}
+
+/* ================= FILTERS ================= */
+.doctor-page .doctor-filters {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.doctor-page .doctor-filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  padding: 12px 40px 12px 16px;
+  min-width: 200px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0.1)
+  );
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 500;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.doctor-page .doctor-filters select:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.doctor-page .doctor-filters select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.doctor-page .doctor-filters option {
+  background: #ffffff;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.doctor-page .doctor-filters::after {
+  content: "⌄";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+/* ================= GRID ================= */
+.doctor-page .doctor-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ================= GLASS CARD ================= */
+.doctor-page .doctor-glass-card {
+  display: flex;
+  align-items: stretch;
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.doctor-page .doctor-glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* ================= LEFT STRIP ================= */
+.doctor-page .doctor-strip {
+  width: 6px;
+  background: linear-gradient(180deg, var(--primary), #818cf8);
+}
+
+/* ================= CONTENT ================= */
+.doctor-page .doctor-content {
+  flex: 1;
+  padding: 20px 24px;
+}
+
+/* ================= TOP ================= */
+.doctor-page .doctor-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.doctor-page .doctor-top img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  object-fit: cover;
+}
+
+.doctor-page .doctor-top h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.doctor-page .specialization {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.doctor-page .status-badge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.doctor-page .status-badge.pending {
+  background-color: #fbbf24; /* yellow */
+}
+
+.doctor-page .status-badge.approved {
+  background-color: var(--success);
+}
+
+.doctor-page .status-badge.rejected {
+  background-color: var(--danger);
+}
+
+/* ================= DETAILS ================= */
+.doctor-page .doctor-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.doctor-page .doctor-details.address {
+  margin-top: 8px;
+  width: 100%;
+}
+
+/* ================= ACTIONS ================= */
+.doctor-page .doctor-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.doctor-page .doctor-actions button {
+  min-width: 120px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.doctor-page .licence-btn {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px dashed var(--primary);
+}
+
+.doctor-page .licence-btn:hover {
+  background: rgba(79, 70, 229, 0.08);
+  transform: translateY(-2px);
+}
+
+.doctor-page .approve-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
+}
+
+.doctor-page .approve-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(34, 197, 94, 0.45);
+}
+
+.doctor-page .reject-btn {
+  background: transparent;
+  color: var(--danger);
+  border: 1.5px solid var(--danger);
+}
+
+.doctor-page .reject-btn:hover {
+  background: rgba(239, 68, 68, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ================= LOADING / EMPTY ================= */
+.doctor-page .loading-text,
+.no-data {
+  text-align: center;
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-top: 40px;
+}
+
+/* ================= MODAL ================= */
+.appointment-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 16px;
+}
+
+.appointment-popup {
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+  animation: popupFade 0.25s ease-in-out;
+}
+
+@keyframes popupFade {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.appointment-popup h3 {
+  margin: 0 0 12px 0;
+  color: var(--text-dark);
+}
+
+.license-image img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.confirm-btn {
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.confirm-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+.cancel-btn {
+  background: transparent;
+  color: var(--danger);
+  border: 1.5px solid var(--danger);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.cancel-btn:hover {
+  background: rgba(239, 68, 68, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .doctor-grid {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-glass-card {
+    flex-direction: column;
+  }
+
+  .doctor-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .doctor-actions button {
+    min-width: auto;
+  }
+
+  .doctor-filters {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .doctor-filters select {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .doctor-top img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .doctor-top h3 {
+    font-size: 16px;
+  }
+}

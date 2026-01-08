@@ -1,0 +1,381 @@
+/* ===================== */
+/* ROOT THEME */
+/* ===================== */
+:root {
+  --primary-blue: #3f51b5;
+  --primary-dark: #2f3fa4;
+  --light-bg: #f5f7ff;
+  --card-border: #e6e9ff;
+  --text-dark: #1f2a44;
+  --text-muted: #4b5565;
+}
+
+/* ===================== */
+/* PAGE */
+/* ===================== */
+.doctor-profile-page {
+  padding: 24px;
+  max-width: 1500px;
+
+  background: var(--light-bg);
+  overflow-y: auto;
+}
+
+/* ===================== */
+/* PROFILE CARD */
+/* ===================== */
+.profile-card {
+  display: flex;
+  gap: 28px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 30px rgba(63, 81, 181, 0.12);
+  flex-wrap: wrap;
+}
+
+/* ===================== */
+/* LEFT */
+/* ===================== */
+.profile-left {
+  position: relative;
+}
+
+.profile-left img {
+  width: 180px;
+  height: 180px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 3px solid var(--primary-blue);
+  background: var(--light-bg);
+}
+
+/* ===================== */
+/* MIDDLE */
+/* ===================== */
+.profile-middle {
+  flex: 1;
+  min-width: 280px;
+}
+
+.profile-middle h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.specialty {
+  color: var(--primary-blue);
+  font-size: 15px;
+  font-weight: 500;
+  margin: 6px 0 14px;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.info p {
+  font-size: 18px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.info i {
+  margin-right: 8px;
+  color: var(--primary-blue);
+}
+
+/* ===================== */
+/* BOOK BUTTON */
+/* ===================== */
+.book-btn {
+  width:200px;
+  margin-top: 18px;
+  padding: 12px 26px;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(63, 81, 181, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(63, 81, 181, 0.45);
+}
+
+/* ===================== */
+/* RIGHT */
+/* ===================== */
+.profile-right {
+  min-width: 220px;
+  text-align: right;
+  font-size: 17px;
+  color: var(--text-muted);
+  margin-right: 30px;;
+}
+
+.profile-right p {
+  margin: 8px 0;
+}
+
+.profile-right i {
+  color: var(--primary-blue);
+  margin-right: 10px;
+}
+
+/* ===================== */
+/* SECTION CARD */
+/* ===================== */
+.section-card {
+  margin-top: 24px;
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 24px rgba(63, 81, 181, 0.08);
+}
+
+.section-card h3 {
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+/* ===================== */
+/* CLINICS */
+/* ===================== */
+.clinic-list {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.clinic-card {
+  display: flex;
+  gap: 14px;
+  background: var(--light-bg);
+  padding: 16px;
+  border-radius: 14px;
+  align-items: center;
+  border: 1px solid var(--card-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clinic-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(63, 81, 181, 0.2);
+}
+
+.clinic-card img {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.clinic-card h4 {
+  margin: 0;
+  color: var(--text-dark);
+}
+
+.clinic-card p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ===================== */
+/* TABLET */
+/* ===================== */
+@media (max-width: 1024px) {
+  .profile-right {
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+  }
+}
+
+/* ===================== */
+/* MOBILE */
+/* ===================== */
+@media (max-width: 768px) {
+
+  .doctor-profile-page {
+    padding: 14px;
+  }
+
+  .profile-card {
+    padding: 16px;
+    gap: 16px;
+    flex-direction: column;
+  }
+
+  .profile-left {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-left img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .profile-middle {
+    text-align: center;
+  }
+
+  .info {
+    grid-template-columns: 1fr;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  .book-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .profile-right {
+    width: 100%;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .profile-right p {
+    background: var(--light-bg);
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+
+  .section-card {
+    padding: 16px;
+  }
+
+  .clinic-list {
+    grid-template-columns: 1fr;
+  }
+
+  .clinic-card img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ===================== */
+/* SMALL MOBILE */
+/* ===================== */
+@media (max-width: 420px) {
+
+  .profile-middle h2 {
+    font-size: 18px;
+  }
+
+  .specialty {
+    font-size: 14px;
+  }
+
+  .info p {
+    font-size: 13px;
+  }
+
+  .profile-right {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-right p {
+    font-size: 12px;
+  }
+}
+
+
+.appointment-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.appointment-popup {
+  background: #fff;
+  padding: 22px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.appointment-popup h3 {
+  text-align: center;
+  color: #2e37a4;
+  margin-bottom: 10px;
+}
+
+.appointment-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.appointment-field label {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.appointment-field input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.confirm-btn {
+  flex: 1;
+  padding: 9px;
+  background: #2e37a4;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 9px;
+  background: #ccc;
+  border: none;
+  border-radius: 6px;
+}
+
+/* Small clinic button */
+.book-btn.small {
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+

@@ -1,0 +1,210 @@
+/* ================== SECTION ================== */
+.departments-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  background: #ffffff;
+  padding: 50px 0 60px;
+}
+
+/* ================== CONTAINER ================== */
+.dept-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* ================== HEADER ================== */
+.dept-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.dept-header h2 {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.dept-header p {
+  margin-top: 10px;
+  font-size: clamp(14px, 2.5vw, 16px);
+  color: #64748b;
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+/* ================== GRID WRAPPER ================== */
+.dept-grid-wrapper {
+  position: relative;
+}
+
+/* ================== SCROLL ================== */
+.dept-scroll {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 10px;
+}
+
+.dept-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ================== GRID ================== */
+.dept-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(180px, 1fr);
+  gap: 24px;
+  padding: 10px 5px;
+}
+
+/* ================== CARD ================== */
+.dept-card {
+  min-width: 180px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 26px 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dept-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+}
+
+/* ================== ICON ================== */
+.dept-icon {
+  width: 100px;
+  height: 100px;
+  background: #eaf4ff;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dept-icon img {
+  width: 58%;
+}
+
+/* ================== TITLE ================== */
+.dept-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+/* ================== BUTTON ================== */
+.consult-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.consult-btn:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+}
+
+/* ================== ARROWS ================== */
+.dept-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+  z-index: 10;
+}
+
+.dept-arrow.left {
+  left: -60px;
+}
+
+.dept-arrow.right {
+  right: -60px;
+}
+
+.dept-arrow:hover {
+  background: #1e40af;
+}
+
+/* ================== TABLET ================== */
+@media (max-width: 1024px) {
+  .dept-arrow.left {
+    left: -35px;
+  }
+
+  .dept-arrow.right {
+    right: -35px;
+  }
+
+  .dept-grid {
+    gap: 20px;
+  }
+}
+
+/* ================== MOBILE ================== */
+@media (max-width: 768px) {
+  .dept-arrow {
+    display: none;
+  }
+
+  .dept-grid {
+    grid-auto-columns: minmax(160px, 1fr);
+    gap: 16px;
+  }
+
+  .dept-icon {
+    width: 85px;
+    height: 85px;
+  }
+
+  .dept-card {
+    padding: 22px 16px;
+  }
+}
+
+/* ================== SMALL MOBILE ================== */
+@media (max-width: 480px) {
+  .departments-section {
+    padding: 55px 0;
+    margin-top: 60px;
+  }
+
+  .dept-header {
+    margin-bottom: 35px;
+  }
+
+  .dept-card h4 {
+    font-size: 14px;
+  }
+
+  .consult-btn {
+    font-size: 13px;
+    padding: 7px 16px;
+  }
+}

@@ -1,0 +1,99 @@
+
+
+.clinic-container .page-title {
+  text-align: center;
+  color: #2f3e46;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.clinic-container {
+ width:100%;
+  margin: auto;
+  padding: 30px 30px;
+  overflow-y: auto;
+
+}
+
+.clinic-container .clinic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.clinic-container .clinic-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  transition: 0.3s ease;
+}
+
+.clinic-container .clinic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.clinic-container .clinic-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.clinic-container .clinic-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: 2px solid #007bff;
+  background-color: #e9f1ff;
+  object-fit: cover;
+}
+
+.clinic-container .clinic-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.clinic-container .clinic-city {
+  color: #555;
+  font-size: 14px;
+}
+
+.clinic-container .clinic-details p {
+  margin: 6px 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.clinic-container .clinic-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap:20px;
+}
+
+.clinic-container .view-btn,
+.book-btn {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.clinic-container .view-btn:hover,
+.book-btn:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .clinic-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

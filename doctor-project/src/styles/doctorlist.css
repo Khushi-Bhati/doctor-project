@@ -1,0 +1,224 @@
+:root {
+  --primary: #3b4cb8;
+  --primary-dark: #2f3e9e;
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+}
+
+/* ================= PAGE ================= */
+.doctor-list-container {
+  padding: 20px;
+  background: var(--bg);
+  animation: fadeIn 0.4s ease;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= HEADER + FILTERS ================= */
+.doctor-list-container .doctor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.doctor-list-container .page-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+/* FILTER BAR */
+.doctor-list-container .header-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  padding: 12px 14px;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(59, 76, 184, 0.12);
+  transition: box-shadow 0.3s ease;
+}
+
+.doctor-list-container .header-filters:hover {
+  box-shadow: 0 12px 30px rgba(59, 76, 184, 0.18);
+}
+
+/* INPUTS */
+.doctor-list-container .header-filters input,
+.header-filters select {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  min-width: 140px;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+.doctor-list-container .header-filters input:focus,
+.header-filters select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(59, 76, 184, 0.2);
+  outline: none;
+}
+
+/* EXPERIENCE INLINE */
+.doctor-list-container .exp-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.doctor-list-container .exp-inline input {
+  width: 70px;
+  text-align: center;
+}
+
+/* BUTTON */
+.doctor-list-container .filter-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.doctor-list-container .filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(59, 76, 184, 0.35);
+}
+
+/* ================= GRID ================= */
+.doctor-list-container .doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 22px;
+}
+
+/* ================= CARD ================= */
+.doctor-list-container .doctor-card {
+  background: var(--card);
+  padding: 15px; /* increased padding for better spacing */
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(59, 76, 184, 0.08);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doctor-list-container .doctor-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 32px rgba(59, 76, 184, 0.2);
+}
+
+.doctor-list-container .doctor-card img {
+  width: 99px;      /* slightly bigger for better look */
+  height: 99px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease;
+}
+
+.doctor-list-container .doctor-card:hover img {
+  transform: scale(1.05);
+}
+
+.doctor-list-container .role {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.doctor-list-container .details {
+  font-size: 13px;
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 12px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+/* STATUS */
+.doctor-list-container .status {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #22c55e;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* BUTTON */
+.doctor-list-container .book-btn {
+  display: block;
+  margin: 12px auto 0 auto; /* top 12px, auto left & right to center */
+  padding: 11px 24px; /* added horizontal padding for better look */
+  background: var(--primary);
+  color: #fff;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  transition: background 0.25s ease, transform 0.25s ease;
+  cursor: pointer;
+}
+
+.doctor-list-container .book-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* PAGINATION */
+.doctor-list-container .pagination {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+ .doctor-list-container .doctor-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+ .doctor-list-container .header-filters {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .doctor-list-container .header-filters input,
+  .header-filters select,
+  .filter-btn {
+    width: 100%;
+  }
+
+ .doctor-list-container .exp-inline {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

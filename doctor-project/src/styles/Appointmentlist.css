@@ -1,0 +1,110 @@
+
+
+.container {
+  max-width: 1250px;
+  margin: 10px 20px;
+  padding: 15px;
+}
+
+.page-title {
+  color: #1e3a8a;
+  margin-bottom: 20px;
+}
+
+/* Table */
+.appointment-table {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 1.5fr 1.5fr 2fr;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-head {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Patient */
+.patient {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.patient img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+/* Status Badge */
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.confirmed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.completed {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Dropdown */
+.status-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .table-row {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+  }
+
+  .table-head {
+    display: none;
+  }
+
+  .table-row div {
+    font-size: 14px;
+  }
+}
