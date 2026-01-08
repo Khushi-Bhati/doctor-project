@@ -7,11 +7,14 @@ import clinicrouter from "./routes/Clinicroutes.js";
 import appointmentrouter from "./routes/Appointment.js";
 
 const app=express();
+app.use(
+  cors({
+    origin: "https://doctor-frontend-project-3.onrender.com",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 
-app.use(cors({
-    origin:"https://doctor-frontend-project-3.onrender.com"
-
-}))
 
 app.use(express.json())
 
