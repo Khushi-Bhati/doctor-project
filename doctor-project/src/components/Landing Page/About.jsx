@@ -1,9 +1,9 @@
 import React from 'react'
-import aboutImage from "./../../images/about.jpg.webp"
+
 import "./../../styles/About.css"
 import consultation from "./../../images/consulation.avif"
 
-import Footer from './Footer'
+
 import Navbar from './Navbar'
 
 const About = () => {
