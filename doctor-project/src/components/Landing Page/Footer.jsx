@@ -26,10 +26,10 @@ const Footer = () => {
           </p>
 
           <div className="footer-socials">
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaInstagram /></a>
-            <a href="#"><FaLinkedinIn /></a>
+            <a ><FaFacebookF /></a>
+            <a ><FaTwitter /></a>
+            <a ><FaInstagram /></a>
+            <a ><FaLinkedinIn /></a>
           </div>
         </div>
 
