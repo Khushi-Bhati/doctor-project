@@ -1,16 +1,11 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "server.js",
   "type": "module",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-    "dev": "nodemon -r dotenv/config --experimental-json-modules src/server.js"
-=======
     "dev": "nodemon -r dotenv/config --experimental-json-modules src/server.js",
     "start": "node -r dotenv/config --experimental-json-modules src/server.js"
->>>>>>> 508d564508cd42bc1f44013c2c08b6ac89a48311
   },
   "author": "gungun@123",
   "license": "ISC",
