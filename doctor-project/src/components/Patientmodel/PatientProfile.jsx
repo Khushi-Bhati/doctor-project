@@ -34,11 +34,11 @@ const PatientProfile = () => {
     alternateNo: ""
   })
 
-  const [profileImage, setProfileImage] = useState(PatientprofileData?.profileImage)
+  
   const [profileImageurl, setprofileImageurl] = useState(PatientprofileData?.profileImage)
 
 
-  const [insuranceImage, setInsuranceImage] = useState(PatientprofileData?.healthinsurance)
+ 
   const [insuranceImageurl, setInsuranceImageurl] = useState(PatientprofileData?.healthinsurance)
 
 
