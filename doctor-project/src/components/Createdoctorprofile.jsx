@@ -147,7 +147,7 @@ const Medical = () => {
                 setLoading(false)
                 Swal.fire({
                     icon: "error",
-                    title: profileresopnse.message,
+                    title: profileresopnse.data.message,
                     draggable: false
                 });
 
