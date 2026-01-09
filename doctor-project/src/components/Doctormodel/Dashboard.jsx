@@ -29,6 +29,7 @@ const Dashboard = () => {
       }
       else {
         console.log("Something went wrong")
+        console.log(profileresponse.data.existingdoctor)
       }
     } catch (error) {
       console.log("getdoctor error", error)
