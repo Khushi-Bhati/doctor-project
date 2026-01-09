@@ -12,7 +12,7 @@ const addDoctorController = async (req, res) => {
         if ([doctorname, speciality, degree, experience, gender, alternateNo, address, city, state, pincode, userID].some((field) => {
             field.trim() === ""
         })) {
-            res.status(200).send(
+           return res.status(200).send(
                 {
                     message: "All fields are required",
                     status: "notsuccess"
@@ -26,7 +26,7 @@ const addDoctorController = async (req, res) => {
         console.log(doctorprofileimagelocalpath)
 
         if (!doctorprofileimagelocalpath) {
-            res.status(200).send(
+           return res.status(200).send(
                 {
                     message: "Profileimage is required",
                     status: 'notsuccess'
@@ -39,7 +39,7 @@ const addDoctorController = async (req, res) => {
         console.log(licenselocalpath)
 
         if (!licenselocalpath) {
-            res.status(200).send(
+           return res.status(200).send(
                 {
                     message: "Licenseimage is required",
                     status: 'notsuccess'
@@ -61,7 +61,7 @@ const addDoctorController = async (req, res) => {
         const existingdoctor = await Doctormodel.findOne({ userID });
 
         if (existingdoctor) {
-            res.status(200).send(
+           return res.status(200).send(
                 {
                     message: "Profile already created",
                     status: "notsuccess"
@@ -96,7 +96,7 @@ const addDoctorController = async (req, res) => {
 
 
 
-        res.status(200).send(
+        return res.status(200).send(
             {
                 message: "Profilecreated successfully",
                 status: "success",
@@ -118,7 +118,7 @@ const addDoctorController = async (req, res) => {
 
 
     } catch (error) {
-        res.status(500).send(
+       return res.status(500).send(
             {
                 message: `doctorcontroller error is: ${error}`,
                 status: "notsuccess"
