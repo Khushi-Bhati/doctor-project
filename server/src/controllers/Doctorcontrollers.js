@@ -26,6 +26,7 @@ const addDoctorController = async (req, res) => {
 
         console.log("Checking profileImage in req.files:", req.files?.profileImage);
         const doctorprofileimagelocalpath = req.files?.profileImage?.[0]?.path;
+        const licenselocalpath = req.files?.licenseImage?.[0]?.path;
         console.log("doctorprofileimagelocalpath:", doctorprofileimagelocalpath)
 
         if (!doctorprofileimagelocalpath) {
