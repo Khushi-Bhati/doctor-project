@@ -7,10 +7,16 @@ const addDoctorController = async (req, res) => {
 
     try {
 
+        console.log("=== ADD DOCTOR DEBUG ===");
+        console.log("req.files:", JSON.stringify(req.files, null, 2));
+        console.log("req.body:", JSON.stringify(req.body, null, 2));
+
         const { doctorname, speciality, degree, experience, gender, alternateNo, address, city, state, pincode, userID } = req.body
 
+        console.log("Parsed fields:", { doctorname, speciality, degree, experience, gender, alternateNo, address, city, state, pincode, userID });
+
         if ([doctorname, speciality, degree, experience, gender, alternateNo, address, city, state, pincode, userID].some((field) => {
-            field.trim() === ""
+            field?.trim() === ""
         })) {
            return res.status(200).send(
                 {
@@ -20,10 +26,9 @@ const addDoctorController = async (req, res) => {
             )
         }
 
-
-
-        const doctorprofileimagelocalpath = req.files?.profileImage[0].path
-        console.log(doctorprofileimagelocalpath)
+        console.log("Checking profileImage in req.files:", req.files?.profileImage);
+        const doctorprofileimagelocalpath = req.files?.profileImage?.[0]?.path;
+        console.log("doctorprofileimagelocalpath:", doctorprofileimagelocalpath)
 
         if (!doctorprofileimagelocalpath) {
            return res.status(200).send(
@@ -35,8 +40,7 @@ const addDoctorController = async (req, res) => {
         }
 
 
-        const licenselocalpath = req.files?.licenseImage[0].path;
-        console.log(licenselocalpath)
+        console.log("licenselocalpath:", licenselocalpath);
 
         if (!licenselocalpath) {
            return res.status(200).send(
@@ -50,9 +54,30 @@ const addDoctorController = async (req, res) => {
 
 
 
-        const doctorprofileimage = await uploadoncloudinary(doctorprofileimagelocalpath)
+        console.log("Uploading profile image to Cloudinary...");
+        const doctorprofileimage = await uploadoncloudinary(doctorprofileimagelocalpath);
+        console.log("Cloudinary response for profile image:", doctorprofileimage);
 
+        console.log("Uploading license image to Cloudinary...");
         const licenseimage = await uploadoncloudinary(licenselocalpath);
+        console.log("Cloudinary response for license image:", licenseimage);
+
+        // Handle null Cloudinary responses
+        if (!doctorprofileimage || !doctorprofileimage.url) {
+            console.error("ERROR: Profile image upload failed or returned null");
+            return res.status(500).send({
+                message: "Profile image upload failed",
+                status: "notsuccess"
+            });
+        }
+
+        if (!licenseimage || !licenseimage.url) {
+            console.error("ERROR: License image upload failed or returned null");
+            return res.status(500).send({
+                message: "License image upload failed",
+                status: "notsuccess"
+            });
+        }
 
 
 
