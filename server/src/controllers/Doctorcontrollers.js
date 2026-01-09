@@ -15,9 +15,7 @@ const addDoctorController = async (req, res) => {
 
         console.log("Parsed fields:", { doctorname, speciality, degree, experience, gender, alternateNo, address, city, state, pincode, userID });
 
-        if ([doctorname, speciality, degree, experience, gender, alternateNo, address, city, state, pincode, userID].some((field) => {
-            field?.trim() === ""
-        })) {
+        if ([doctorname, speciality, degree, experience, gender, alternateNo, address, city, state, pincode, userID] .some(field => !field || field.trim() === "")) {
            return res.status(200).send(
                 {
                     message: "All fields are required",
