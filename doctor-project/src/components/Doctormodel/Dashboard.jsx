@@ -23,6 +23,7 @@ const Dashboard = () => {
 
       if (profileresponse.data.status === "success") {
         Dispatch(setProfileData(profileresponse.data.existingdoctor))
+        console.log(profileresponse.data.existingdoctor)
         // Dispatch(setProfileData(profileresponse.data.existingdoctor))
 
       }
