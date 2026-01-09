@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   const getProfile = async () => {
     try {
-      const profileresponse = await axios.get(`/Hospital/doctor/getdoctor/${localStorage.getItem("loginid")}`)
+      const profileresponse = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/doctor/getdoctor/${localStorage.getItem("loginid")}`)
 
       if (profileresponse.data.status === "success") {
         Dispatch(setProfileData(profileresponse.data.existingdoctor))
