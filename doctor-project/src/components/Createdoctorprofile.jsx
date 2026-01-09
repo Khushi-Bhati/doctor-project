@@ -109,7 +109,7 @@ const Medical = () => {
             }
 
 
-            const profileresopnse = await axios.post("/Hospital/doctor/adddoctor",
+            const profileresopnse = await axios.post(`${process.env.REACT_APP_API_URL}Hospital/doctor/adddoctor`,
                 formdata
 
 
