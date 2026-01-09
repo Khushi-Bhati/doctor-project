@@ -54,70 +54,60 @@ const registerController=async(req,res)=>{
 
 }
 
-const logincontroller=async(req,res)=>{
-    try {
-        const {email,password}=req.body;
+const logincontroller = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-        if([email,password].some((field)=>{
-            field.trim()===""
-        })){
-            res.status(200).send({
-                message:"All fields are required",
-                status:"notsuccess"
-            })
-        }
-
-
-
-        const user=await Usermodel.findOne({email});
-
-        console.log(user)
-
-        if(!user){
-            res.status(200).send(
-                {
-                    message:"Please register first",
-                    status:"notsuccess"
-                }
-            )
-        }
-
-
-        const matchpassword=await user.isPasswordCorrect(password)
-
-        if(!matchpassword){
-            res.status(200).send(
-                {
-                    message:"Invalid email or password",
-                    status:'notsuccess'
-                }
-            )
-        }
-
-
-        const token=await user.generateAccessToken();
-
-        res.status(200).send(
-            {
-                message:"Login successfully",
-                status:"success",
-                loginid:user._id,
-                role:user.usertype,
-                isprofilecreated:user.isprofilecreated,
-                token
-            }
-        )
-
-
-    } catch (error) {
-        res.status(500).send(
-            {
-                message:`login error:${error}`,
-                status:"notsuccess"
-            }
-        )
-        
+    if ([email, password].some(field => !field || field.trim() === "")) {
+      return res.status(400).json({
+        message: "All fields are required",
+        status: "notsuccess",
+      });
     }
-}
+
+    const user = await Usermodel.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({
+        message: "Please register first",
+        status: "notsuccess",
+      });
+    }
+
+    const matchpassword = await user.isPasswordCorrect(password);
+
+    if (!matchpassword) {
+      return res.status(400).json({
+        message: "Invalid email or password",
+        status: "notsuccess",
+      });
+    }
+
+    const token = await user.generateAccessToken();
+
+    // ✅ SET COOKIE HERE (IMPORTANT)
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,     
+     
+    });
+
+
+    return res.status(200).json({
+      message: "Login successfully",
+      status: "success",
+      loginid: user._id,
+      role: user.usertype,
+      isprofilecreated: user.isprofilecreated,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: `login error: ${error.message}`,
+      status: "notsuccess",
+    });
+  }
+};
+
 
 export {registerController,logincontroller}

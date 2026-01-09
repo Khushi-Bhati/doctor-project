@@ -5,6 +5,11 @@ import cors from "cors"
 import patientrouter from "./routes/patientroutes.js";
 import clinicrouter from "./routes/Clinicroutes.js";
 import appointmentrouter from "./routes/Appointment.js";
+import cookieParser from "cookie-parser";
+
+
+
+
 
 const app=express();
 app.use(
@@ -14,7 +19,7 @@ app.use(
        credentials: true
   })
 );
-
+app.use(cookieParser()); 
 
 app.use(express.json())
 
