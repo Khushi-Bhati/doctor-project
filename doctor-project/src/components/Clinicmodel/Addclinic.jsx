@@ -84,7 +84,7 @@ const Addclinic = () => {
             }
 
 
-            const clinicresponse = await axios.post("/Hospital/clinic/addclinic", formdata)
+            const clinicresponse = await axios.post(`${process.env.REACT_APP_API_URL}/Hospital/clinic/addclinic`, formdata)
 
             if (clinicresponse.data.status === "success") {
                 setLoading(false)

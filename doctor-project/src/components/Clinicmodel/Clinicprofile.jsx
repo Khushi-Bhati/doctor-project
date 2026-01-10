@@ -46,7 +46,7 @@ const Clinicprofile = () => {
     e.preventDefault();
     try {
       const response = await axios.patch(
-        `/Hospital/clinic/updateclinic/${params.id}`,
+        `${process.env.REACT_APP_API_URL}/Hospital/clinic/updateclinic/${params.id}`,
         formValue,
         { headers: { "Content-Type": "application/json" } }
       );

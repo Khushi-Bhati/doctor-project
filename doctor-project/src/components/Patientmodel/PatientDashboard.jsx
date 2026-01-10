@@ -15,7 +15,7 @@ const PatientDashboard = () => {
 
     const getPatientprofile = async () => {
         try {
-            const patientprofileresponse = await axios.get(`/Hospital/patient/getpatient/${localStorage.getItem("loginid")}`)
+            const patientprofileresponse = await axios.get(`${process.env.REACT_APP_API_URL}/Hospital/patient/getpatient/${localStorage.getItem("loginid")}`)
             console.log("Patient response:", patientprofileresponse.data);
 
             if (patientprofileresponse.data.status === "success") {

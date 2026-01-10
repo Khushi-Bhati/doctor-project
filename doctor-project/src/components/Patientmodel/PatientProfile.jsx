@@ -83,7 +83,7 @@ const PatientProfile = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault()
-      const updatedpatientresponse = await axios.patch(`/Hospital/patient/updatepatient/${params.id}`,
+      const updatedpatientresponse = await axios.patch(`${process.env.REACT_APP_API_URL}/Hospital/patient/updatepatient/${params.id}`,
         formValue,
         {
           headers: {

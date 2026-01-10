@@ -24,7 +24,7 @@ const Cliniclist = () => {
   const getCliniclist = async () => {
     try {
       setLoading(true)
-      let query = `/Hospital/doctor/getclinicslist?page=${currentpage}&limit=${limit}`
+      let query = `${process.env.REACT_APP_API_URL}/Hospital/doctor/getclinicslist?page=${currentpage}&limit=${limit}`
 
       const cliniclistresponse = await axios.get(query)
 

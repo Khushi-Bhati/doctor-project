@@ -71,7 +71,7 @@ const Profile = () => {
       formdata.append("profileImage", image)
 
 
-      const updatedImage = await axios.patch(`/Hospital/doctor/updatedoctorimg/${params.id}`, formdata)
+      const updatedImage = await axios.patch(`${process.env.REACT_APP_API_URL}/Hospital/doctor/updatedoctorimg/${params.id}`, formdata)
 
       if (updatedImage.data.status === "success") {
 
