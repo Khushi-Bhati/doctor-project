@@ -9,6 +9,7 @@ const Clinicdashboard = () => {
 
   const dispatch = useDispatch()
   const clinicprofileData = useSelector((state) => state.clinicprofile)
+  console.log(clinicprofileData)
 
   const getclinicProfile = async () => {
     try {
