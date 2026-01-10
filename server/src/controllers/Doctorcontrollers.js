@@ -297,37 +297,36 @@ const updateDoctorimgController = async (req, res) => {
 }
 
 const getaClinicslist = async (req, res) => {
-    try {
-        const page = req.query.page
-        const limit = req.query.limit
+  try {
+    // Convert query params to numbers + defaults
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
 
-        const pageskip = (page - 1) * limit
+    // Prevent negative skip
+    const pageskip = (page - 1) * limit;
 
+    const clinics = await Clinicmodel
+      .find()
+      .skip(pageskip)
+      .limit(limit);
 
+    const total = await Clinicmodel.countDocuments();
 
-        const clinics = await Clinicmodel.find().skip(pageskip).limit(limit);
-        const total = await Clinicmodel.countDocuments();
+    res.status(200).json({
+      status: "success",
+      totalpages: Math.ceil(total / limit),
+      currentpage: page,
+      totalrecords: total,
+      clinics,
+    });
 
-        res.status(200).send({
-            status: "success",
-            totalpages: Math.ceil(total / limit),
-            currentpage: page,
-            totalrecords: total,
-            clinics
-        })
-
-
-    } catch (error) {
-        res.status(500).send(
-            {
-                message: `clinic list error:${error}`,
-                status: "notsuccess"
-            }
-        )
-
-    }
-
-}
+  } catch (error) {
+    res.status(500).json({
+      status: "notsuccess",
+      message: `Clinic list error: ${error.message}`,
+    });
+  }
+};
 
 
 const addClinictoDoctor = async (req, res) => {
