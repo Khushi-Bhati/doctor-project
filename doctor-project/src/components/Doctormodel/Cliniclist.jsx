@@ -68,6 +68,7 @@ const Cliniclist = () => {
   };
 
   useEffect(() => {
+      console.log("useEffect triggered", currentpage, limit);
     getCliniclist();
   }, [currentpage, limit]);
 
