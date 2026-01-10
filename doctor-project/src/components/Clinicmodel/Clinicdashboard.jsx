@@ -17,6 +17,7 @@ const Clinicdashboard = () => {
       const clinicprofileresponse = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/clinic/getclinic/${localStorage.getItem("loginid")}`)
       if (clinicprofileresponse.data.status === "success") {
         Dispatch(setClinicprofile(clinicprofileresponse.data.existingclinic))
+        console.log(clinicprofileresponse.data.existingclinic)
       }
       else {
         console.log("Something went wrong")
