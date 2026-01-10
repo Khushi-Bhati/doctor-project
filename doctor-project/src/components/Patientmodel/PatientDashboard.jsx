@@ -23,6 +23,7 @@ const PatientDashboard = () => {
             }
             else {
                 console.log("something went wrong")
+                console.log(patientprofileresponse.data.existingPatient)
             }
         } catch (error) {
             console.log(error)
