@@ -20,7 +20,7 @@ const App = () => {
 
   const getDoctorProfile = async () => {
     try {
-      const res = await axios.get(`/Hospital/doctor/getdoctor/${loginId}`);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/doctor/getdoctor/${loginId}`);
       if (res.data.status === "success") {
         dispatch(setProfileData(res.data.existingdoctor));
       }
@@ -32,7 +32,7 @@ const App = () => {
 
   const getPatientProfile = async () => {
     try {
-      const res = await axios.get(`/Hospital/patient/getpatient/${loginId}`);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/patient/getpatient/${loginId}`);
       if (res.data.status === "success") {
         dispatch(setPatientprofile(res.data.existingPatient));
       }
@@ -44,7 +44,7 @@ const App = () => {
 
   const getClinicProfile = async () => {
     try {
-      const res = await axios.get(`/Hospital/clinic/getclinic/${loginId}`);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/clinic/getclinic/${loginId}`);
       if (res.data.status === "success") {
         dispatch(setClinicprofile(res.data.existingclinic));
       }
