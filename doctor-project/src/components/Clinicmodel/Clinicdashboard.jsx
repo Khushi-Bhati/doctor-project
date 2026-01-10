@@ -9,13 +9,12 @@ const Clinicdashboard = () => {
 
   const dispatch = useDispatch()
   const clinicprofileData = useSelector((state) => state.clinicprofile)
-  console.log(clinicprofileData)
 
   const getclinicProfile = async () => {
     try {
       const res = await axios.get(
         `${process.env.REACT_APP_API_URL}Hospital/clinic/getclinic/${localStorage.getItem("loginid")}`,
-        { withCredentials: true } // ✅ if using cookies
+        { withCredentials: true }
       )
 
       if (res.data.status === "success") {
@@ -23,21 +22,25 @@ const Clinicdashboard = () => {
       } else {
         console.log("Something went wrong")
       }
-
     } catch (error) {
       console.log("getclinic error", error)
     }
   }
 
+  // ✅ API call on dashboard mount
   useEffect(() => {
-    if (!clinicprofileData) {
-      getclinicProfile()
-    }
-  }, []) // 👈 runs once on mount
+    getclinicProfile()
+  }, []) // 👈 runs once when dashboard loads
+
+  // ✅ Optional loading UI
+  if (!clinicprofileData) {
+    return <p style={{ padding: "20px" }}>Loading dashboard...</p>
+  }
 
   return (
     <div className="main-container">
       <Clinicsidebar />
+
       <div className="main-content">
         <Clinicheader />
 
@@ -45,7 +48,7 @@ const Clinicdashboard = () => {
           <div className="welcome-banner">
             <div className="welcome-text">
               <h1>
-                Good Morning, <b>{clinicprofileData?.clinicName}</b>
+                Good Morning, <b>{clinicprofileData.clinicName}</b>
               </h1>
               <p>Here is your health dashboard overview for today.</p>
             </div>
@@ -57,7 +60,7 @@ const Clinicdashboard = () => {
             />
           </div>
 
-          {/* Rest of your dashboard stays SAME */}
+          {/* Rest of dashboard */}
         </div>
       </div>
     </div>
@@ -65,4 +68,5 @@ const Clinicdashboard = () => {
 }
 
 export default Clinicdashboard
+
 
