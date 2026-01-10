@@ -48,7 +48,7 @@ const Cliniclist = () => {
 
   const handleaddClinic =async(clinicId) =>{
     try {
-      const addClinicresponse = await axios.post("/Hospital/doctor/addtodoctor",{
+      const addClinicresponse = await axios.post(`${process.env.REACT_APP_API_URL}/Hospital/doctor/addtodoctor`,{
         doctorid:profileData._id,
         clinicid:clinicId
       },
