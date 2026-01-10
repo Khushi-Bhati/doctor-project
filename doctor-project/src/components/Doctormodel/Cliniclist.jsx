@@ -15,6 +15,7 @@ const Cliniclist = () => {
   const [loading, setLoading] = useState(false);
   const [limit, setLimit] = useState(3);
   const [clinics, setClinics] = useState([]);
+  console.log(clinics)
   const [totalpages, setTotalpages] = useState(0);
   const [totalclinics, setTotalclinics] = useState(0);
   const [currentpage, setCurrentPage] = useState(1);
