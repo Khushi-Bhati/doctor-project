@@ -20,26 +20,26 @@ const Cliniclist = () => {
   const [totalclinics, setTotalclinics] = useState(0);
   const [currentpage, setCurrentPage] = useState(1);
 
-  const getCliniclist = async () => {
-    try {
-      setLoading(true);
+const getCliniclist = async () => {
+  try {
+    setLoading(true);
 
-      const query = `${process.env.REACT_APP_API_URL}Hospital/doctor/getclinicslist?page=${currentpage}&limit=${limit}`;
-      console.log("API HIT:", query);
+    const query = `${process.env.REACT_APP_API_URL}Hospital/doctor/getclinicslist?page=${currentpage}&limit=${limit}&_=${Date.now()}`;
 
-      const response = await axios.get(query);
+    const response = await axios.get(query);
 
-      if (response.data.status === "success") {
-        setClinics(response.data.clinics);
-        setTotalpages(response.data.totalpages);
-        setTotalclinics(response.data.totalrecords); // ✅ FIX
-      }
-    } catch (error) {
-      console.log("API ERROR:", error);
-    } finally {
-      setLoading(false);
+    if (response.data?.status === "success") {
+      setClinics(response.data.clinics || []);
+      setTotalpages(response.data.totalpages || 0);
+      setTotalclinics(response.data.totalrecords || response.data.total || 0);
     }
-  };
+  } catch (error) {
+    console.log("API ERROR:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const onChange = (page, pageSize) => {
     setCurrentPage(page);
