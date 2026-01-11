@@ -298,11 +298,9 @@ const updateDoctorimgController = async (req, res) => {
 
 const getaClinicslist = async (req, res) => {
   try {
-    // Convert query params to numbers + defaults
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
 
-    // Prevent negative skip
     const pageskip = (page - 1) * limit;
 
     const clinics = await Clinicmodel
@@ -311,6 +309,14 @@ const getaClinicslist = async (req, res) => {
       .limit(limit);
 
     const total = await Clinicmodel.countDocuments();
+
+    // 🚫 Disable caching (CRITICAL)
+    res.set({
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0",
+      "Surrogate-Control": "no-store",
+    });
 
     res.status(200).json({
       status: "success",
