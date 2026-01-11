@@ -29,29 +29,37 @@ const App = () => {
     }
   };
 
-
-  const getPatientProfile = async () => {
-    try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/patient/getpatient/${loginId}`);
-      if (res.data.status === "success") {
-        dispatch(setPatientprofile(res.data.existingPatient));
+const getPatientProfile = async () => {
+  try {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_URL}Hospital/patient/getpatient/${loginId}`,
+      {
+        headers: { 'Cache-Control': 'no-cache' },
       }
-    } catch (err) {
-      console.log("Patient profile error:", err);
+    );
+    if (res.data.status === "success") {
+      dispatch(setPatientprofile(res.data.existingPatient));
     }
-  };
+  } catch (err) {
+    console.log("Patient profile error:", err);
+  }
+};
 
-
-  const getClinicProfile = async () => {
-    try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/clinic/getclinic/${loginId}`);
-      if (res.data.status === "success") {
-        dispatch(setClinicprofile(res.data.existingclinic));
+const getClinicProfile = async () => {
+  try {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_URL}Hospital/clinic/getclinic/${loginId}`,
+      {
+        headers: { 'Cache-Control': 'no-cache' },
       }
-    } catch (err) {
-      console.log("Clinic profile error:", err);
+    );
+    if (res.data.status === "success") {
+      dispatch(setClinicprofile(res.data.existingclinic));
     }
-  };
+  } catch (err) {
+    console.log("Clinic profile error:", err);
+  }
+};
 
 
   useEffect(() => {
