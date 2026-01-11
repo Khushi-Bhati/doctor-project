@@ -25,10 +25,11 @@ const getCliniclist = async () => {
     setLoading(true);
 
     const query = `${process.env.REACT_APP_API_URL}/Hospital/doctor/getclinicslist?page=1&limit=3
-
+console.log(query)
     const response = await axios.get(query);
 
     if (response.data?.status === "success") {
+    console.log(response.data.clinics)
       setClinics(response.data.clinics || []);
       setTotalpages(response.data.totalpages || 0);
       setTotalclinics(response.data.totalrecords || response.data.total || 0);
