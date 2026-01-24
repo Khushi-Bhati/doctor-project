@@ -60,7 +60,7 @@ const getCliniclist = async () => {
   const handleaddClinic = async (clinicId) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/Hospital/doctor/addtodoctor`,
+        `${process.env.REACT_APP_API_URL}Hospital/doctor/addtodoctor`,
         {
           doctorid: profileData._id,
           clinicid: clinicId,
