@@ -24,18 +24,28 @@ const getCliniclist = async () => {
   try {
     setLoading(true);
 
-    const query = `${process.env.REACT_APP_API_URL}Hospital/doctor/getclinicslist?page=${currentpage}&limit=${limit}`
-console.log(query)
+    const query = `${process.env.REACT_APP_API_URL}/Hospital/doctor/getclinicslist?page=${currentpage}&limit=${limit}`;
+    console.log("API URL:", query);
+
     const response = await axios.get(query);
 
+    console.log("FULL API RESPONSE:", response);
+    console.log("RESPONSE DATA:", response.data);
+
     if (response.data?.status === "success") {
-    console.log(response.data.clinics)
+      console.log("CLINICS ARRAY:", response.data.clinics);
+      console.log("CLINICS LENGTH:", response.data.clinics?.length);
+
       setClinics(response.data.clinics || []);
       setTotalpages(response.data.totalpages || 0);
-      setTotalclinics(response.data.totalrecords || response.data.total || 0);
+      setTotalclinics(
+        response.data.totalrecords || response.data.total || 0
+      );
+    } else {
+      console.warn("API STATUS NOT SUCCESS", response.data);
     }
   } catch (error) {
-    console.log("API ERROR:", error);
+    console.error("API ERROR:", error?.response || error);
   } finally {
     setLoading(false);
   }
