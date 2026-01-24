@@ -24,7 +24,7 @@ const Doctorslist = () => {
   const getDoctorlist = async () => {
     try {
       setLoading(true);
-      let query = `${process.env.REACT_APP_API_URL}/Hospital/patient/getdoctorslist?page=${currentPage}&limit=${limit}`;
+      let query = `${process.env.REACT_APP_API_URL}Hospital/patient/getdoctorslist?page=${currentPage}&limit=${limit}`;
 
       if (doctorname) query += `&doctorname=${doctorname}`;
       if (speciality) query += `&speciality=${speciality}`;
