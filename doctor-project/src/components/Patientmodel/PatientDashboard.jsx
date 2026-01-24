@@ -16,11 +16,11 @@ const PatientDashboard = () => {
     const getPatientprofile = async () => {
         try {
             const patientprofileresponse = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/patient/getpatient/${localStorage.getItem("loginid")}`)
-            console.log("Patient response:", patientprofileresponse.data.existingPatient);
+            console.log("Patient response:", patientprofileresponse.data.patient);
 
             if (patientprofileresponse.data.status === "success") {
-                console.log(patientprofileresponse.data.existingPatient)
-                Dispatch(setPatientprofile(patientprofileresponse.data.existingPatient))
+                console.log(patientprofileresponse.data.patient)
+                Dispatch(setPatientprofile(patientprofileresponse.data.patient))
             }
             else {
                 console.log("something went wrong")
