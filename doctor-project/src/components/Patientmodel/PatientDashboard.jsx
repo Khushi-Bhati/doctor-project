@@ -13,29 +13,31 @@ const PatientDashboard = () => {
     console.log(PatientprofileData)
 
 
-    const getPatientprofile = async () => {
-        try {
-            const patientprofileresponse = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/patient/getpatient/${localStorage.getItem("loginid")}`)
-            console.log("Patient response:", patientprofileresponse.data.existingPatient);
+  const getPatientprofile = async () => {
+    const loginId = localStorage.getItem("loginid");
+    if (!loginId) {
+        console.log("Login ID missing");
+        return;
+    }
 
-            if (patientprofileresponse.data.status === "success") {
-                Dispatch(setPatientprofile(patientprofileresponse.data.existingPatient))
-            }
-            else {
-                console.log("something went wrong")
-                console.log(patientprofileresponse.data.existingPatient)
-            }
-        } catch (error) {
-            console.log(error)
+    try {
+        const patientprofileresponse = await axios.get(
+            `${process.env.REACT_APP_API_URL}Hospital/patient/getpatient/${loginId}`
+        );
+
+        if (patientprofileresponse.data.status === "success") {
+            Dispatch(setPatientprofile(patientprofileresponse.data.existingPatient));
         }
-
+    } catch (error) {
+        console.log("Patient API error:", error);
     }
+};
 
-    if (!PatientprofileData) {
-
-        getPatientprofile()
-
-    }
+    useEffect(() => {
+        if (!patient?._id) {
+            getPatientprofile();
+        }
+    }, []);
 
 
     return (
