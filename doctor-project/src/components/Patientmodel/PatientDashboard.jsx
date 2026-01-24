@@ -19,6 +19,7 @@ const PatientDashboard = () => {
             console.log("Patient response:", patientprofileresponse.data.existingPatient);
 
             if (patientprofileresponse.data.status === "success") {
+                console.log(patientprofileresponse.data.existingPatient)
                 Dispatch(setPatientprofile(patientprofileresponse.data.existingPatient))
             }
             else {
