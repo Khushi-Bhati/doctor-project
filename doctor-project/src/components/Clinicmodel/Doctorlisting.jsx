@@ -44,9 +44,10 @@ const [approvedDoctors,setapprovedDoctors] = useState(false)
 
       const res = await axios.get(query);
 
-      if (res?.data?.status === "success") {
-        setDoctors(res.data.doctors || []);
-        setTotalDoctors(res.data.totalrecords || 0);
+     
+      if (res.data.status === "success") {
+        setDoctors(res.data.doctors);
+        setTotalDoctors(res.data.totalrecords);
       }
     } catch (error) {
       console.log("Error fetching doctors:", error);
