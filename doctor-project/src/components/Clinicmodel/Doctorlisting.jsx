@@ -23,7 +23,7 @@ const [approvedDoctors,setapprovedDoctors] = useState(false)
   const [status, setstatus] = useState("pending");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const limit = 8;
+  const limit = 2;
 
   const handlepopup = (doctor, clinicId) => {
     setselecteddoctor(doctor);
