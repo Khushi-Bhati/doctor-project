@@ -20,7 +20,7 @@ const [approvedDoctors,setapprovedDoctors] = useState(false)
   const [speciality, setSpeciality] = useState("");
   const [minExp, setMinExp] = useState("");
   const [maxExp, setMaxExp] = useState("");
-  const [status, setstatus] = useState("pending");
+  const [status, setstatus] = useState("notverified");
 
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 2;
