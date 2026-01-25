@@ -43,7 +43,7 @@ const Doctorfullprofile = () => {
       const getdoctorresponse = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/patient/viewProfileBydoctorid/${params.id}`)
 
       if (getdoctorresponse.data.status === "success") {
-        setDoctordata(getdoctorresponse.data.existingdoctor)
+        setDoctordata(getdoctorresponse.data.doctor)
 
       }
       else {
