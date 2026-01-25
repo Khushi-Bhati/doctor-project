@@ -120,7 +120,7 @@ const [approvedDoctors,setapprovedDoctors] = useState(false)
               }}
             >
               <option value="">All</option>
-              <option value="pending">Pending</option>
+              <option value="notverified">Not verified</option>
               <option value="approved">Approved</option>
               <option value="rejected">Rejected</option>
             </select>
