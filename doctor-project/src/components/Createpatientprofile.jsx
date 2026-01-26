@@ -136,7 +136,7 @@ const Createpatientprofile = () => {
                 setLoading(false)
                 return
             }
-            const patientprofileresopnse = await axios.post(`${process.env.REACT_APP_API_URL}/Hospital/patient/addpatient`,
+            const patientprofileresopnse = await axios.post(`${process.env.REACT_APP_API_URL}Hospital/patient/addpatient`,
                 formdata
 
 
