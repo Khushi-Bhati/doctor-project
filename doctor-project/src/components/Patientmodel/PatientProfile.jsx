@@ -237,7 +237,7 @@ const PatientProfile = () => {
               </label>
             </div>
 
-            <h2>{formValue.patientname || "Patient Name"}</h2>
+            <h2>{formValue?.patientname || "Patient Name"}</h2>
             <p>{PatientprofileData?.userID?.email}</p>
           </div>
 
@@ -248,7 +248,7 @@ const PatientProfile = () => {
               <input
                 type="text"
                 name="patientname"
-                value={formValue.patientname || ""}
+                value={formValue?.patientname || ""}
                 onChange={handelChnage}
               />
             </div>
