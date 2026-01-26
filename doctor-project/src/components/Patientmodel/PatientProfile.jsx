@@ -83,7 +83,7 @@ const PatientProfile = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault()
-      const updatedpatientresponse = await axios.patch(`${process.env.REACT_APP_API_URL}/Hospital/patient/updatepatient/${params.id}`,
+      const updatedpatientresponse = await axios.patch(`${process.env.REACT_APP_API_URL}Hospital/patient/updatepatient/${params.id}`,
         formValue,
         {
           headers: {
@@ -124,7 +124,7 @@ const PatientProfile = () => {
       const formdata = new FormData()
       formdata.append("profileImage", profileimage)
 
-      const updatedprofileimgresponse = await axios.patch(`/Hospital/patient/updatepatientimg/${params.id}`,
+      const updatedprofileimgresponse = await axios.patch(`${process.env.REACT_APP_API_URL}Hospital/patient/updatepatientimg/${params.id}`,
         formdata
       )
 
@@ -165,7 +165,7 @@ const PatientProfile = () => {
       const formdata = new FormData()
       formdata.append("healthinsurance", insuranceimage)
 
-      const updatedinsuranceimgresponse = await axios.patch(`/Hospital/patient/updateinsuranceimg/${params.id}`,
+      const updatedinsuranceimgresponse = await axios.patch(`${process.env.REACT_APP_API_URL}Hospital/patient/updateinsuranceimg/${params.id}`,
         formdata,
 
       );
