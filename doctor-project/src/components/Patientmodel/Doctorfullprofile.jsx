@@ -74,7 +74,7 @@ const Doctorfullprofile = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/Hospital/appointment/bookappointment`,
+        `${process.env.REACT_APP_API_URL}Hospital/appointment/bookappointment`,
         {
           bookingDate: formvalue.bookingDate,
           bookingTime: formvalue.bookingTime,
