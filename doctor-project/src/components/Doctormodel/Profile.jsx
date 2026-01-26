@@ -144,7 +144,7 @@ const Profile = () => {
     try {
       e.preventDefault()
       setLoading(true)
-      const updatedresponse = await axios.patch(`/Hospital/doctor/updatedoctor/${params.id}`,
+      const updatedresponse = await axios.patch(`${process.env.REACT_APP_API_URL}Hospital/doctor/updatedoctor/${params.id}`,
         formValue,
         {
           headers: {
