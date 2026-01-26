@@ -153,7 +153,7 @@
 }
 
 /* ================== TABLET ================== */
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .dept-arrow.left {
     left: -35px;
   }
@@ -165,7 +165,7 @@
   .dept-grid {
     gap: 20px;
   }
-}
+} */
 
 /* ================== MOBILE ================== */
 @media (max-width: 768px) {
@@ -173,10 +173,10 @@
     display: none;
   }
 
-  .dept-grid {
+  /* .dept-grid {
     grid-auto-columns: minmax(160px, 1fr);
     gap: 16px;
-  }
+  } */
 
   .dept-icon {
     width: 85px;
