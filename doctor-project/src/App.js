@@ -38,7 +38,7 @@ const getPatientProfile = async () => {
       }
     );
     if (res.data.status === "success") {
-      dispatch(setPatientprofile(res.data.existingPatient));
+      dispatch(setPatientprofile(res.data.Patient));
     }
   } catch (err) {
     console.log("Patient profile error:", err);
