@@ -258,7 +258,7 @@ const PatientProfile = () => {
               <input
                 type="text"
                 name="gender"
-                value={formValue.gender || ""}
+                value={formValue?.gender || ""}
                 onChange={handelChnage}
               />
             </div>
@@ -268,7 +268,7 @@ const PatientProfile = () => {
               <input
                 type="date"
                 name="DOB"
-                value={formValue.DOB || ""}
+                value={formValue?.DOB || ""}
                 onChange={handelChnage}
               />
             </div>
@@ -278,7 +278,7 @@ const PatientProfile = () => {
               <input
                 type="text"
                 name="bloodgroup"
-                value={formValue.bloodgroup || ""}
+                value={formValue?.bloodgroup || ""}
                 onChange={handelChnage}
               />
             </div>
@@ -288,7 +288,7 @@ const PatientProfile = () => {
               <input
                 type="text"
                 name="height"
-                value={formValue.height || ""}
+                value={formValue?.height || ""}
                 onChange={handelChnage}
               />
             </div>
@@ -298,7 +298,7 @@ const PatientProfile = () => {
               <input
                 type="text"
                 name="weight"
-                value={formValue.weight || ""}
+                value={formValue?.weight || ""}
                 onChange={handelChnage}
               />
             </div>
@@ -308,7 +308,7 @@ const PatientProfile = () => {
               <input
                 type="text"
                 name="allergies"
-                value={formValue.allergies || ""}
+                value={formValue?.allergies || ""}
                 onChange={handelChnage}
               />
             </div>
@@ -318,7 +318,7 @@ const PatientProfile = () => {
               <input
                 type="text"
                 name="alternateNo"
-                value={formValue.alternateNo || ""}
+                value={formValue?.alternateNo || ""}
                 onChange={handelChnage}
               />
             </div>
@@ -328,7 +328,7 @@ const PatientProfile = () => {
               <input
                 type="text"
                 name="address"
-                value={formValue.address || ""}
+                value={formValue?.address || ""}
                 onChange={handelChnage}
               />
             </div>
