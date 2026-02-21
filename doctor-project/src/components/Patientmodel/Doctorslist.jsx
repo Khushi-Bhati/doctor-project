@@ -19,7 +19,7 @@ const Doctorslist = () => {
   const [maxExp, setMaxExp] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit] = useState(8);
+  const [limit] = useState(4);
 
   const getDoctorlist = async () => {
     try {

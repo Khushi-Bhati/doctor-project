@@ -23,7 +23,7 @@ const Doctorlisting = () => {
   const [status, setstatus] = useState("notverified");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const limit = 8;
+  const limit = 2;
 
   const handlepopup = (doctor, clinicId) => {
     setselecteddoctor(doctor);
@@ -44,9 +44,10 @@ const Doctorlisting = () => {
 
       const res = await axios.get(query);
 
-      if (res?.data?.status === "success") {
-        setDoctors(res.data.doctors || []);
-        setTotalDoctors(res.data.totalrecords || 0);
+     
+      if (res.data.status === "success") {
+        setDoctors(res.data.doctors);
+        setTotalDoctors(res.data.totalrecords);
       }
     } catch (error) {
       console.log("Error fetching doctors:", error);
@@ -119,7 +120,7 @@ const Doctorlisting = () => {
               }}
             >
               <option value="">All</option>
-              <option value="pending">Pending</option>
+              <option value="notverified">Not verified</option>
               <option value="approved">Approved</option>
               <option value="rejected">Rejected</option>
             </select>

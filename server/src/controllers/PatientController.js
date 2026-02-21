@@ -112,9 +112,9 @@ const getPatientController = async (req, res) => {
   try {
     const userID = req.params.id;
 
-    const patient = await Patientmodel.findOne({ userID }).populate("userID");
+    const existingPatient = await Patientmodel.findOne({ userID }).populate("userID");
 
-    if (!patient) {
+    if (!existingPatient) {
       return res.status(404).send({
         message: "Patient not found",
         status: "notsuccess"
@@ -124,7 +124,7 @@ const getPatientController = async (req, res) => {
     return res.status(200).send({
       message: "Profile fetched successfully",
       status: "success",
-      patient
+existingPatient
     });
 
   } catch (error) {
