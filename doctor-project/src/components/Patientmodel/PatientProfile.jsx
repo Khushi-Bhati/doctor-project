@@ -34,11 +34,11 @@ const PatientProfile = () => {
     alternateNo: ""
   })
 
-  
+
   const [profileImageurl, setprofileImageurl] = useState(PatientprofileData?.profileImage)
 
 
- 
+
   const [insuranceImageurl, setInsuranceImageurl] = useState(PatientprofileData?.healthinsurance)
 
 
@@ -83,7 +83,7 @@ const PatientProfile = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault()
-      const updatedpatientresponse = await axios.patch(`${process.env.REACT_APP_API_URL}/Hospital/patient/updatepatient/${params.id}`,
+      const updatedpatientresponse = await axios.patch(`${process.env.REACT_APP_API_URL}Hospital/patient/updatepatient/${params.id}`,
         formValue,
         {
           headers: {
@@ -200,179 +200,193 @@ const PatientProfile = () => {
   }
 
   useEffect(() => {
-    updateformvalues()
+    const fetchProfile = async () => {
+      try {
+        const loginid = localStorage.getItem("loginid");
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/patient/getpatient/${loginid}`);
+        if (res.data.status === "success") {
+          Dispatch(setPatientprofile(res.data.patient));
+        }
+      } catch (error) {
+        console.log("PatientProfile fetch error:", error);
+      }
+    };
 
-
+    if (!PatientprofileData) {
+      fetchProfile();
+    } else {
+      updateformvalues();
+    }
   }, [PatientprofileData])
 
   return (
     <>
-<div className="main-container" >
-            <PatientSidebar />
-            <main class="main-content">
-                <PatientHeader />
+      <div className="main-container" >
+        <PatientSidebar />
+        <main class="main-content">
+          <PatientHeader />
 
 
 
-        <div className="profile-wrapper">
-          {/* Cover */}
-          <div className="profile-cover" />
+          <div className="profile-wrapper">
+            {/* Cover */}
+            <div className="profile-cover" />
 
-          {/* Profile Header */}
-          <div className="profile-header">
-            <div className="profile-avatar">
-              <img
-                src={profileImageurl ? profileImageurl : user}
-                alt="Patient"
-              />
+            {/* Profile Header */}
+            <div className="profile-header">
+              <div className="profile-avatar">
+                <img
+                  src={profileImageurl ? profileImageurl : user}
+                  alt="Patient"
+                />
 
-              <label className="avatar-edit">
-                +
+                <label className="avatar-edit">
+                  +
+                  <input
+                    type="file"
+                    accept="image/*"
+                    hidden
+                    onChange={handleProfileImage}
+                  />
+                </label>
+              </div>
+
+              <h2>{formValue.patientname || "Patient Name"}</h2>
+              <p>{PatientprofileData?.userID?.email}</p>
+            </div>
+
+            {/* Profile Form */}
+            <form className="profile-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Patient Name</label>
+                <input
+                  type="text"
+                  name="patientname"
+                  value={formValue.patientname || ""}
+                  onChange={handelChnage}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Gender</label>
+                <input
+                  type="text"
+                  name="gender"
+                  value={formValue.gender || ""}
+                  onChange={handelChnage}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Date of Birth</label>
+                <input
+                  type="date"
+                  name="DOB"
+                  value={formValue.DOB || ""}
+                  onChange={handelChnage}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Blood Group</label>
+                <input
+                  type="text"
+                  name="bloodgroup"
+                  value={formValue.bloodgroup || ""}
+                  onChange={handelChnage}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Height (cm)</label>
+                <input
+                  type="text"
+                  name="height"
+                  value={formValue.height || ""}
+                  onChange={handelChnage}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Weight (kg)</label>
+                <input
+                  type="text"
+                  name="weight"
+                  value={formValue.weight || ""}
+                  onChange={handelChnage}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Allergies</label>
+                <input
+                  type="text"
+                  name="allergies"
+                  value={formValue.allergies || ""}
+                  onChange={handelChnage}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Alternate No</label>
+                <input
+                  type="text"
+                  name="alternateNo"
+                  value={formValue.alternateNo || ""}
+                  onChange={handelChnage}
+                />
+              </div>
+
+              <div className="form-group full-width">
+                <label>Address</label>
+                <input
+                  type="text"
+                  name="address"
+                  value={formValue.address || ""}
+                  onChange={handelChnage}
+                />
+              </div>
+
+              {/* Insurance Upload */}
+              <div className="form-group full-width">
+                <label>Health Insurance</label>
+
+                <div className="insurance-preview small">
+                  <img
+                    src={insuranceImageurl ? insuranceImageurl : user}
+                    alt="Insurance"
+                  />
+                </div>
+
                 <input
                   type="file"
+                  id="insuranceUpload"
                   accept="image/*"
+                  onChange={handleinsuranceImage}
                   hidden
-                  onChange={handleProfileImage}
                 />
-              </label>
-            </div>
 
-            <h2>{formValue.patientname || "Patient Name"}</h2>
-            <p>{PatientprofileData?.userID?.email}</p>
+                <label htmlFor="insuranceUpload" className="insurance-upload-btn">
+                  Upload / Change Insurance
+                </label>
+              </div>
+
+
+
+              {/* Submit */}
+              <div className="form-actions">
+                <button type="submit" className="patient-submit-btn">
+                  Update Profile
+                </button>
+              </div>
+            </form>
           </div>
-
-          {/* Profile Form */}
-          <form className="profile-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Patient Name</label>
-              <input
-                type="text"
-                name="patientname"
-                value={formValue.patientname || ""}
-                onChange={handelChnage}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Gender</label>
-              <input
-                type="text"
-                name="gender"
-                value={formValue.gender || ""}
-                onChange={handelChnage}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Date of Birth</label>
-              <input
-                type="date"
-                name="DOB"
-                value={formValue.DOB || ""}
-                onChange={handelChnage}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Blood Group</label>
-              <input
-                type="text"
-                name="bloodgroup"
-                value={formValue.bloodgroup || ""}
-                onChange={handelChnage}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Height (cm)</label>
-              <input
-                type="text"
-                name="height"
-                value={formValue.height || ""}
-                onChange={handelChnage}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Weight (kg)</label>
-              <input
-                type="text"
-                name="weight"
-                value={formValue.weight || ""}
-                onChange={handelChnage}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Allergies</label>
-              <input
-                type="text"
-                name="allergies"
-                value={formValue.allergies || ""}
-                onChange={handelChnage}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Alternate No</label>
-              <input
-                type="text"
-                name="alternateNo"
-                value={formValue.alternateNo || ""}
-                onChange={handelChnage}
-              />
-            </div>
-
-            <div className="form-group full-width">
-              <label>Address</label>
-              <input
-                type="text"
-                name="address"
-                value={formValue.address || ""}
-                onChange={handelChnage}
-              />
-            </div>
-
-            {/* Insurance Upload */}
- <div className="form-group full-width">
-  <label>Health Insurance</label>
-
-  <div className="insurance-preview small">
-    <img
-      src={insuranceImageurl ? insuranceImageurl : user}
-      alt="Insurance"
-    />
-  </div>
-
-  <input
-    type="file"
-    id="insuranceUpload"
-    accept="image/*"
-    onChange={handleinsuranceImage}
-    hidden
-  />
-
-  <label htmlFor="insuranceUpload" className="insurance-upload-btn">
-    Upload / Change Insurance
-  </label>
-</div>
+        </main>
+      </div>
 
 
 
-            {/* Submit */}
-            <div className="form-actions">
-              <button type="submit" className="patient-submit-btn">
-                Update Profile
-              </button>
-            </div>
-          </form>
-        </div>
-      </main>
-    </div>
- 
-
-
-      </>
+    </>
   )
 }
 

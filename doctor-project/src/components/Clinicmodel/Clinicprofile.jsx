@@ -24,7 +24,21 @@ const Clinicprofile = () => {
   });
 
   useEffect(() => {
-    if (clinicprofileData) {
+    const fetchClinicProfile = async () => {
+      try {
+        const loginid = localStorage.getItem("loginid");
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/clinic/getclinic/${loginid}`);
+        if (res.data.status === "success") {
+          dispatch(setClinicprofile(res.data.existingclinic));
+        }
+      } catch (error) {
+        console.log("Clinicprofile fetch error:", error);
+      }
+    };
+
+    if (!clinicprofileData) {
+      fetchClinicProfile();
+    } else {
       setFormvalue({
         clinicname: clinicprofileData.clinicname || "",
         address: clinicprofileData.address || "",
@@ -46,7 +60,7 @@ const Clinicprofile = () => {
     e.preventDefault();
     try {
       const response = await axios.patch(
-        `${process.env.REACT_APP_API_URL}/Hospital/clinic/updateclinic/${params.id}`,
+        `${process.env.REACT_APP_API_URL}Hospital/clinic/updateclinic/${params.id}`,
         formValue,
         { headers: { "Content-Type": "application/json" } }
       );

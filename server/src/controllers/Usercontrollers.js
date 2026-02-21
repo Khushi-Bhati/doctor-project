@@ -1,56 +1,56 @@
 import { Usermodel } from "../models/Usermodel.js";
 
-const registerController=async(req,res)=>{
-    try {
-        const {username,email,password,mobileno,usertype}=req.body;
+const registerController = async (req, res) => {
+  try {
+    const { username, email, password, mobileno, usertype } = req.body;
 
-        if([username,email,password,mobileno,usertype].some((field)=>{
-            field.trim()===""
-        })){
-            res.status(200).send({
-                message:"All fields are required",
-                status:"notsuccess"
-            })
-        }
-
-
-        // find data read data
-
-
-        const user=await Usermodel.findOne({email});
-
-        if(user){
-            res.status(200).send({
-                message:"User already exist",
-                status:'notsuccess'
-            })
-        }
-
-
-        const createuser=await Usermodel.create({
-            email,
-            username,
-            mobileno,
-            usertype,
-            password
-            
-        })
-
-
-
-        res.status(200).send({
-            message:"User Register successfully",
-            status:'success',
-            profile:createuser
-        })
-        
-    } catch (error) {
-        res.status(500).send({
-            message:`register user error:${error}`,
-            status:"failed"
-        })
-        
+    if ([username, email, password, mobileno, usertype].some((field) => {
+      field.trim() === ""
+    })) {
+      return res.status(200).send({
+        message: "All fields are required",
+        status: "notsuccess"
+      })
     }
+
+
+    // find data read data
+
+
+    const user = await Usermodel.findOne({ email });
+
+    if (user) {
+      return res.status(200).send({
+        message: "User already exist",
+        status: 'notsuccess'
+      })
+    }
+
+
+    const createuser = await Usermodel.create({
+      email,
+      username,
+      mobileno,
+      usertype,
+      password
+
+    })
+
+
+
+    res.status(200).send({
+      message: "User Register successfully",
+      status: 'success',
+      profile: createuser
+    })
+
+  } catch (error) {
+    res.status(500).send({
+      message: `register user error:${error}`,
+      status: "failed"
+    })
+
+  }
 
 }
 
@@ -88,8 +88,8 @@ const logincontroller = async (req, res) => {
     // ✅ SET COOKIE HERE (IMPORTANT)
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,     
-     
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
     });
 
 
@@ -110,4 +110,4 @@ const logincontroller = async (req, res) => {
 };
 
 
-export {registerController,logincontroller}
+export { registerController, logincontroller }

@@ -3,14 +3,14 @@ import "./../../styles/panel.css"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import user from "./../../images/user.webp"
-import { setProfileData } from "../../reducers/Reducers"
+import { setProfileData, setPatientprofile } from "../../reducers/Reducers"
 
 const PatientSidebar = () => {
     const Dispatch = useDispatch()
     const Navigate = useNavigate()
     const patientprofileData = useSelector((state) => state.patientprofile)
 
-    const [sidebarOpen, setSidebarOpen] = useState(false); 
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
     const [active, setactive] = useState("")
@@ -28,10 +28,8 @@ const PatientSidebar = () => {
         localStorage.removeItem("usertype");
         localStorage.removeItem("token")
         Dispatch(setProfileData(null))
-
-
+        Dispatch(setPatientprofile(null))
         Navigate("/login")
-
     }
 
     return (
@@ -39,7 +37,7 @@ const PatientSidebar = () => {
             <button className="menu-toggle-btn" onClick={toggleSidebar}>
                 <i className="fa-solid fa-bars"></i>
             </button>
-          
+
 
             <div className='main-sidebar' > <div className={`sidebar ${sidebarOpen ? "open" : ""}`} >
                 <div className="sidebar-header">
@@ -48,9 +46,9 @@ const PatientSidebar = () => {
                     </svg>
                     <h1 className="sidebar-logo">PatientMD</h1>
                 </div>
-                  <button className="close-btn" onClick={() => setSidebarOpen(false)}>
-                <i className="fa-solid fa-xmark"></i>
-            </button>
+                <button className="close-btn" onClick={() => setSidebarOpen(false)}>
+                    <i className="fa-solid fa-xmark"></i>
+                </button>
                 <div className="sidebar-profile">
                     <img src={patientprofileData?.profileImage ? patientprofileData.profileImage : user} alt="Admin Photo" />
                     <h3>{patientprofileData?.patientname}</h3>
@@ -88,7 +86,7 @@ const PatientSidebar = () => {
                                 strokeWidth="1.6"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                               
+
                             >
 
                                 <circle cx="12" cy="7" r="3" />
@@ -102,9 +100,9 @@ const PatientSidebar = () => {
 
                             {/* Dropdown arrow */}
                             {activeDropdown === "patient" ? (
-                                <i style={{marginLeft:"95px"}} className="fa-solid fa-caret-up" onClick={toggledropdown} />
+                                <i style={{ marginLeft: "95px" }} className="fa-solid fa-caret-up" onClick={toggledropdown} />
                             ) : (
-                                <i style={{marginLeft:"96px"}} className="fa-solid fa-caret-down" onClick={toggledropdown} />
+                                <i style={{ marginLeft: "96px" }} className="fa-solid fa-caret-down" onClick={toggledropdown} />
                             )}
                         </a>
 
@@ -130,7 +128,7 @@ const PatientSidebar = () => {
                     >
 
                         <a >
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <rect x={3} y={3} width={7} height={7} />
                                 <rect x={14} y={3} width={7} height={7} />
                                 <rect x={14} y={14} width={7} height={7} />

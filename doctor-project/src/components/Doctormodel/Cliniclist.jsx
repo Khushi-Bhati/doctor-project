@@ -10,9 +10,9 @@ import { useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 
 const Cliniclist = () => {
-    const profileData = useSelector((state) => state.doctorprofile)
-      console.log(profileData)
-  
+  const profileData = useSelector((state) => state.doctorprofile)
+  console.log(profileData)
+
   const [loading, setLoading] = useState(false)
 
   const [limit, setLimit] = useState(3) // DEFAULT LIMIT
@@ -24,7 +24,7 @@ const Cliniclist = () => {
   const getCliniclist = async () => {
     try {
       setLoading(true)
-      let query = `${process.env.REACT_APP_API_URL}/Hospital/doctor/getclinicslist?page=${currentpage}&limit=${limit}`
+      let query = `${process.env.REACT_APP_API_URL}Hospital/doctor/getclinicslist?page=${currentpage}&limit=${limit}`
 
       const cliniclistresponse = await axios.get(query)
 
@@ -46,27 +46,26 @@ const Cliniclist = () => {
   };
 
 
-  const handleaddClinic =async(clinicId) =>{
+  const handleaddClinic = async (clinicId) => {
     try {
-      const addClinicresponse = await axios.post("/Hospital/doctor/addtodoctor",{
-        doctorid:profileData._id,
-        clinicid:clinicId
+      const addClinicresponse = await axios.post("/Hospital/doctor/addtodoctor", {
+        doctorid: profileData._id,
+        clinicid: clinicId
       },
-       {
+        {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         }
       )
 
-      
-    if (addClinicresponse.data.status === "success")
-       {
-       Swal.fire({
-              title: addClinicresponse.data.message,
-              icon: "success",
-            })
-          }
+
+      if (addClinicresponse.data.status === "success") {
+        Swal.fire({
+          title: addClinicresponse.data.message,
+          icon: "success",
+        })
+      }
     } catch (error) {
-      console.log("error:",error)
+      console.log("error:", error)
     }
   }
 
@@ -120,33 +119,33 @@ const Cliniclist = () => {
             {clinics.length > 0 ? (
               clinics.map((clinic, index) => (
                 < div className="clinic-card">
-                <div className="clinic-left">
-                  <img className="clinic-logo" src={clinic.clinicImages[0]} />
-                  <div className="clinic-info">
-                    <h3>{clinic.clinicname}</h3>
-                    <p className="location">General Health Clinic • {clinic.address}</p>
-                    <p className="fees">₹600 Consultation Fees</p>
-                    <p className="open">Open Today 7:00 AM - 1:00 PM</p>
-                    <div className="doctor">
-                      <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" />
-                      <div>
-                        <strong>Dr. Maheshwar Chawla</strong>
-                        <span>General Physician • 19 yrs exp</span>
+                  <div className="clinic-left">
+                    <img className="clinic-logo" src={clinic.clinicImages[0]} />
+                    <div className="clinic-info">
+                      <h3>{clinic.clinicname}</h3>
+                      <p className="location">General Health Clinic • {clinic.address}</p>
+                      <p className="fees">₹600 Consultation Fees</p>
+                      <p className="open">Open Today 7:00 AM - 1:00 PM</p>
+                      <div className="doctor">
+                        <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" />
+                        <div>
+                          <strong>Dr. Maheshwar Chawla</strong>
+                          <span>General Physician • 19 yrs exp</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="clinic-right">
-    
-                  <button onClick={() =>handleaddClinic(clinic._id)} className="add-btn">+ Add</button>
-                </div>
-              </div>)))
+                  <div className="clinic-right">
+
+                    <button onClick={() => handleaddClinic(clinic._id)} className="add-btn">+ Add</button>
+                  </div>
+                </div>)))
               : (<p>No Clinics found</p>)}
 
 
-           
+
             {/* Clinic Card */}
-              <div className="pagination">
+            <div className="pagination">
               <Pagination
                 showQuickJumper
                 pageSizeOptions={[4, 8, 12, 20]}

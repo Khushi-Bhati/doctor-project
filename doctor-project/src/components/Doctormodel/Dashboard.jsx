@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from './Sidebar.jsx'
 import Header from './Header.jsx'
 import "./../../styles/panel.css"
@@ -17,32 +17,34 @@ const Dashboard = () => {
 
 
 
-  const getProfile = async () => {
-    try {
-      const profileresponse = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/doctor/getdoctor/${localStorage.getItem("loginid")}`)
+    const getProfile = async () => {
+        try {
+            const profileresponse = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/doctor/getdoctor/${localStorage.getItem("loginid")}`)
 
-      if (profileresponse.data.status === "success") {
-        Dispatch(setProfileData(profileresponse.data.existingdoctor))
-        console.log(profileresponse.data.existingdoctor)
-        // Dispatch(setProfileData(profileresponse.data.existingdoctor))
+            if (profileresponse.data.status === "success") {
+                Dispatch(setProfileData(profileresponse.data.existingdoctor))
+                console.log(profileresponse.data.existingdoctor)
+                // Dispatch(setProfileData(profileresponse.data.existingdoctor))
 
-      }
-      else {
-        console.log("Something went wrong")
-        console.log(profileresponse.data.existingdoctor)
-      }
-    } catch (error) {
-      console.log("getdoctor error", error)
+            }
+            else {
+                console.log("Something went wrong")
+                console.log(profileresponse.data.existingdoctor)
+            }
+        } catch (error) {
+            console.log("getdoctor error", error)
+        }
     }
-  }
 
 
-  if(!profileData){
-    getProfile()
-  }
+    useEffect(() => {
+        if (!profileData) {
+            getProfile()
+        }
+    }, [])
 
 
-   
+
     return (
         <><div className="main-container">
             <Sidebar />

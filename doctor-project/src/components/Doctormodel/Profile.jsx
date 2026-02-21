@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import "./../../styles/panel.css"
 import Sidebar from './Sidebar'
@@ -33,10 +33,10 @@ const Profile = () => {
     experience: "",
     gender: "",
     alternateNo: "",
-    address:"",
-    city:"",
-    state:"",
-    pincode:"",
+    address: "",
+    city: "",
+    state: "",
+    pincode: "",
 
   })
 
@@ -71,12 +71,12 @@ const Profile = () => {
       formdata.append("profileImage", image)
 
 
-      const updatedImage = await axios.patch(`${process.env.REACT_APP_API_URL}/Hospital/doctor/updatedoctorimg/${params.id}`, formdata)
+      const updatedImage = await axios.patch(`${process.env.REACT_APP_API_URL}Hospital/doctor/updatedoctorimg/${params.id}`, formdata)
 
       if (updatedImage.data.status === "success") {
 
-        Dispatch(setProfileData(updatedImage.data.getdoctor))
-        setProfileImgurl(updatedImage.data.getdoctor)
+        Dispatch(setProfileData(updatedImage.data.updatedoctorimg))
+        setProfileImgurl(updatedImage.data.updatedoctorimg?.profileImage)
 
 
 
@@ -114,10 +114,10 @@ const Profile = () => {
         experience: profileData?.experience,
         gender: profileData?.gender,
         alternateNo: profileData?.alternateNo,
-        address:profileData?.address,
-        city:profileData?.city,
-        state:profileData?.state,
-        pincode:profileData?.pincode
+        address: profileData?.address,
+        city: profileData?.city,
+        state: profileData?.state,
+        pincode: profileData?.pincode
 
       }
     )
@@ -144,7 +144,7 @@ const Profile = () => {
     try {
       e.preventDefault()
       setLoading(true)
-      const updatedresponse = await axios.patch(`/Hospital/doctor/updatedoctor/${params.id}`,
+      const updatedresponse = await axios.patch(`${process.env.REACT_APP_API_URL}Hospital/doctor/updatedoctor/${params.id}`,
         formValue,
         {
           headers: {
@@ -185,13 +185,24 @@ const Profile = () => {
 
 
   useEffect(() => {
-    updateformvalues()
+    const fetchProfile = async () => {
+      try {
+        const loginid = localStorage.getItem("loginid");
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/doctor/getdoctor/${loginid}`);
+        if (res.data.status === "success") {
+          Dispatch(setProfileData(res.data.existingdoctor));
+        }
+      } catch (error) {
+        console.log("Doctor Profile fetch error:", error);
+      }
+    };
 
-    updateprofileImage()
-
-
-
-
+    if (!profileData) {
+      fetchProfile();
+    } else {
+      updateformvalues();
+      updateprofileImage();
+    }
   }, [profileData])
 
 
@@ -210,104 +221,104 @@ const Profile = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
       <div className="main-container">
-        <Sidebar  />
+        <Sidebar />
         <main className="main-content">
-          <Header/>
+          <Header />
 
-    <div className="profile-container-new">
+          <div className="profile-container-new">
 
-  {/* Banner + Avatar */}
-  <div className="profile-banner-wrapper">
-    <div className="profile-banner"></div>
+            {/* Banner + Avatar */}
+            <div className="profile-banner-wrapper">
+              <div className="profile-banner"></div>
 
-    <div className="profile-avatar-box">
-      <img
-        src={profileImgurl === null ? user : profileImgurl}
-        alt="Profile"
-        className="profile-avatar"
-      />
+              <div className="profile-avatar-box">
+                <img
+                  src={profileImgurl === null ? user : profileImgurl}
+                  alt="Profile"
+                  className="profile-avatar"
+                />
 
-      <label htmlFor="fileInput" className="profile-upload-btn">+</label>
-      <input
-        id="fileInput"
-        type="file"
-        accept="image/*"
-        onChange={handleImage}
-        hidden
-      />
-    </div>
-  </div>
+                <label htmlFor="fileInput" className="profile-upload-btn">+</label>
+                <input
+                  id="fileInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImage}
+                  hidden
+                />
+              </div>
+            </div>
 
-  {/* Basic Info */}
-  <div className="profile-basic-info">
-    <h1>Dr. {profileData?.doctorname}</h1>
-    <p>{profileData?.userID?.email}</p>
-  </div>
+            {/* Basic Info */}
+            <div className="profile-basic-info">
+              <h1>Dr. {profileData?.doctorname}</h1>
+              <p>{profileData?.userID?.email}</p>
+            </div>
 
-  {/* Form */}
-  <form className="profile-form" onSubmit={handelSubmit}>
+            {/* Form */}
+            <form className="profile-form" onSubmit={handelSubmit}>
 
-    <div className="input-row">
-      <div className="input-box">
-        <label>Doctor Name</label>
-        <input type="text" name="doctorname" value={formValue.doctorname} onChange={handelChnage} />
-      </div>
+              <div className="input-row">
+                <div className="input-box">
+                  <label>Doctor Name</label>
+                  <input type="text" name="doctorname" value={formValue.doctorname} onChange={handelChnage} />
+                </div>
 
-      <div className="input-box">
-        <label>Speciality</label>
-        <input type="text" name="speciality" value={formValue.speciality} onChange={handelChnage} />
-      </div>
-    </div>
+                <div className="input-box">
+                  <label>Speciality</label>
+                  <input type="text" name="speciality" value={formValue.speciality} onChange={handelChnage} />
+                </div>
+              </div>
 
-    <div className="input-row">
-      <div className="input-box">
-        <label>Experience</label>
-        <input type="text" name="experience" value={formValue.experience} onChange={handelChnage} />
-      </div>
+              <div className="input-row">
+                <div className="input-box">
+                  <label>Experience</label>
+                  <input type="text" name="experience" value={formValue.experience} onChange={handelChnage} />
+                </div>
 
-      <div className="input-box">
-        <label>Degree</label>
-        <input type="text" name="degree" value={formValue.degree} onChange={handelChnage} />
-      </div>
-    </div>
-     <div className="input-row">
-      <div className="input-box">
-        <label>Gender</label>
-        <input type="text" name="gender" value={formValue.gender} onChange={handelChnage} />
-      </div>
+                <div className="input-box">
+                  <label>Degree</label>
+                  <input type="text" name="degree" value={formValue.degree} onChange={handelChnage} />
+                </div>
+              </div>
+              <div className="input-row">
+                <div className="input-box">
+                  <label>Gender</label>
+                  <input type="text" name="gender" value={formValue.gender} onChange={handelChnage} />
+                </div>
 
-      <div className="input-box">
-        <label>Alternate No</label>
-        <input type="text" name="alternateNo" value={formValue.alternateNo} onChange={handelChnage} />
-      </div>
-    </div>
-     <div className="input-row">
-      <div className="input-box">
-        <label>Address</label>
-        <input type="text" name="address" value={formValue.address} onChange={handelChnage} />
-      </div>
+                <div className="input-box">
+                  <label>Alternate No</label>
+                  <input type="text" name="alternateNo" value={formValue.alternateNo} onChange={handelChnage} />
+                </div>
+              </div>
+              <div className="input-row">
+                <div className="input-box">
+                  <label>Address</label>
+                  <input type="text" name="address" value={formValue.address} onChange={handelChnage} />
+                </div>
 
-      <div className="input-box">
-        <label>City</label>
-        <input type="text" name="city" value={formValue.city} onChange={handelChnage} />
-      </div>
-    </div>
-     <div className="input-row">
-      <div className="input-box">
-        <label>State</label>
-        <input type="text" name="state" value={formValue.state} onChange={handelChnage} />
-      </div>
+                <div className="input-box">
+                  <label>City</label>
+                  <input type="text" name="city" value={formValue.city} onChange={handelChnage} />
+                </div>
+              </div>
+              <div className="input-row">
+                <div className="input-box">
+                  <label>State</label>
+                  <input type="text" name="state" value={formValue.state} onChange={handelChnage} />
+                </div>
 
-      <div className="input-box">
-        <label>Pincode</label>
-        <input type="text" name="pincode" value={formValue.pincode} onChange={handelChnage} />
-      </div>
-    </div>
+                <div className="input-box">
+                  <label>Pincode</label>
+                  <input type="text" name="pincode" value={formValue.pincode} onChange={handelChnage} />
+                </div>
+              </div>
 
-    <button className="profile-save-btn">Save Changes</button>
-  </form>
+              <button className="profile-save-btn">Save Changes</button>
+            </form>
 
-</div>
+          </div>
 
 
         </main>

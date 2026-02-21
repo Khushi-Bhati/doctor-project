@@ -15,26 +15,25 @@ const PatientDashboard = () => {
 
     const getPatientprofile = async () => {
         try {
-            const patientprofileresponse = await axios.get(`${process.env.REACT_APP_API_URL}/Hospital/patient/getpatient/${localStorage.getItem("loginid")}`)
+            const loginid = localStorage.getItem("loginid");
+            const patientprofileresponse = await axios.get(`${process.env.REACT_APP_API_URL}Hospital/patient/getpatient/${loginid}`)
             console.log("Patient response:", patientprofileresponse.data);
 
             if (patientprofileresponse.data.status === "success") {
-                Dispatch(setPatientprofile(patientprofileresponse.data.existingPatient))
-            }
-            else {
-                console.log("something went wrong")
+                Dispatch(setPatientprofile(patientprofileresponse.data.patient))
+            } else {
+                console.log("something went wrong", patientprofileresponse.data.message)
             }
         } catch (error) {
-            console.log(error)
+            console.log("getPatientprofile error:", error)
         }
-
     }
 
-    if (!PatientprofileData) {
-
-        getPatientprofile()
-
-    }
+    useEffect(() => {
+        if (!PatientprofileData) {
+            getPatientprofile()
+        }
+    }, [])
 
 
     return (

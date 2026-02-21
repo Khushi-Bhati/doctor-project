@@ -15,12 +15,12 @@ const Doctorlisting = () => {
   const [loading, setLoading] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [totalDoctors, setTotalDoctors] = useState(0);
-const [approvedDoctors,setapprovedDoctors] = useState(false)
+  const [approvedDoctors, setapprovedDoctors] = useState(false)
   const [doctorname, setDoctorname] = useState("");
   const [speciality, setSpeciality] = useState("");
   const [minExp, setMinExp] = useState("");
   const [maxExp, setMaxExp] = useState("");
-  const [status, setstatus] = useState("pending");
+  const [status, setstatus] = useState("notverified");
 
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 8;
@@ -35,7 +35,7 @@ const [approvedDoctors,setapprovedDoctors] = useState(false)
     try {
       setLoading(true);
 
-      let query = `${process.env.REACT_APP_API_URL}/Hospital/patient/getdoctorslist?page=${currentPage}&limit=${limit}`;
+      let query = `${process.env.REACT_APP_API_URL}Hospital/patient/getdoctorslist?page=${currentPage}&limit=${limit}`;
       if (doctorname) query += `&doctorname=${doctorname}`;
       if (speciality) query += `&speciality=${speciality}`;
       if (minExp) query += `&minimumexperience=${minExp}`;
@@ -57,11 +57,11 @@ const [approvedDoctors,setapprovedDoctors] = useState(false)
 
   const DoctorStatusUpdate = async (id, status) => {
     try {
-      const updateDoctors = doctors.map((doctor) =>{
-        if(doctor._id === id){
+      const updateDoctors = doctors.map((doctor) => {
+        if (doctor._id === id) {
           return {
             ...doctor,
-            status : status
+            status: status
           }
           return doctor
         }
@@ -70,7 +70,7 @@ const [approvedDoctors,setapprovedDoctors] = useState(false)
       setDoctors(updateDoctors)
       const response = await axios.patch(
         "/Hospital/clinic/approveddoctors",
-        { doctorid: id, status:status },
+        { doctorid: id, status: status },
         { headers: { "Content-Type": "application/json" } }
       );
 
@@ -185,27 +185,27 @@ const [approvedDoctors,setapprovedDoctors] = useState(false)
                       >
                         View Licence
                       </button>
-{doctor?.status === "notverified" && (<>
-  <button
-                        onClick={() => {
-                          DoctorStatusUpdate(doctor._id, "approved");
-                          
-                        }}
-                      >
-                        Approve
-                      </button>
-                      <button
-                        className="reject-btn"
-                        onClick={() => {
-                          DoctorStatusUpdate(doctor._id, "rejected")
-                          
-                        }
-                        }
-                      >
-                        Reject
-                      </button></>)}
+                      {doctor?.status === "notverified" && (<>
+                        <button
+                          onClick={() => {
+                            DoctorStatusUpdate(doctor._id, "approved");
 
-                    
+                          }}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          className="reject-btn"
+                          onClick={() => {
+                            DoctorStatusUpdate(doctor._id, "rejected")
+
+                          }
+                          }
+                        >
+                          Reject
+                        </button></>)}
+
+
 
                     </div>
                   </div>

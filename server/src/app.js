@@ -11,28 +11,27 @@ import cookieParser from "cookie-parser";
 
 
 
-const app=express();
+const app = express();
 app.use(
   cors({
-    origin: [ "https://doctor-frontend-project-3.onrender.com",
-   "https://doctor-project-1-yndq.onrender.com" ],
-       credentials: true
+    origin: true,
+    credentials: true
   })
 );
-app.use(cookieParser()); 
+app.use(cookieParser());
 // app.options("/*", cors());
 
 app.use(express.json())
 
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"))
 
 
-app.use("/Hospital/doctor",doctorrouter);
-app.use("/Hospital/user",userrouter);
-app.use("/Hospital/patient",patientrouter)
-app.use("/Hospital/clinic",clinicrouter)
-app.use("/Hospital/appointment",appointmentrouter)
+app.use("/Hospital/doctor", doctorrouter);
+app.use("/Hospital/user", userrouter);
+app.use("/Hospital/patient", patientrouter)
+app.use("/Hospital/clinic", clinicrouter)
+app.use("/Hospital/appointment", appointmentrouter)
 
 
 
@@ -42,4 +41,4 @@ app.use("/Hospital/appointment",appointmentrouter)
 
 
 
-export {app}
+export { app }

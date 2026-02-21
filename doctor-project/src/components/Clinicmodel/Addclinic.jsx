@@ -63,7 +63,7 @@ const Addclinic = () => {
             formdata.append("openingtime", formvalue.openingtime)
             formdata.append("closingtime", formvalue.closingtime)
             formdata.append("totalDoctors", formvalue.totalDoctors)
-          
+
 
 
 
@@ -84,7 +84,7 @@ const Addclinic = () => {
             }
 
 
-            const clinicresponse = await axios.post(`${process.env.REACT_APP_API_URL}/Hospital/clinic/addclinic`, formdata)
+            const clinicresponse = await axios.post(`${process.env.REACT_APP_API_URL}Hospital/clinic/addclinic`, formdata)
 
             if (clinicresponse.data.status === "success") {
                 setLoading(false)
